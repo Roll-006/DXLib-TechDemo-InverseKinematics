@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{4586f924-16a6-437a-84c0-47ade1bc146e}</ProjectGuid>
+    <RootNamespace>Project</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="SourceCode\Algorithm\algorithm.cpp" />
+    <ClCompile Include="SourceCode\Algorithm\a_star.cpp" />
+    <ClCompile Include="SourceCode\Animator\player_animator.cpp" />
+    <ClCompile Include="SourceCode\Base\animator_base.cpp" />
+    <ClCompile Include="SourceCode\Base\character_base.cpp" />
+    <ClCompile Include="SourceCode\Base\object_pool_base.cpp" />
+    <ClCompile Include="SourceCode\Base\obj_base.cpp" />
+    <ClCompile Include="SourceCode\Base\physical_obj_base.cpp" />
+    <ClCompile Include="SourceCode\Calculation\collision_calculator.cpp" />
+    <ClCompile Include="SourceCode\Calculation\math.cpp" />
+    <ClCompile Include="SourceCode\Calculation\quaternion.cpp" />
+    <ClCompile Include="SourceCode\Command\command_handler.cpp" />
+    <ClCompile Include="SourceCode\Debugger\debugger.cpp" />
+    <ClCompile Include="SourceCode\Drawer\drawer.cpp" />
+    <ClCompile Include="SourceCode\Font\font_handler.cpp" />
+    <ClCompile Include="SourceCode\GameSystem\game_system_setter.cpp" />
+    <ClCompile Include="SourceCode\GameTime\fps.cpp" />
+    <ClCompile Include="SourceCode\GameTime\game_time_manager.cpp" />
+    <ClCompile Include="SourceCode\Handle\handle_keeper.cpp" />
+    <ClCompile Include="SourceCode\Input\input_checker.cpp" />
+    <ClCompile Include="SourceCode\JSON\json_loader.cpp" />
+    <ClCompile Include="SourceCode\Light\spot_light.cpp" />
+    <ClCompile Include="SourceCode\Light\point_light.cpp" />
+    <ClCompile Include="SourceCode\Light\directional_light.cpp" />
+    <ClCompile Include="SourceCode\Light\light_holder.cpp" />
+    <ClCompile Include="SourceCode\main.cpp" />
+    <ClCompile Include="SourceCode\Manager\collision_manager.cpp" />
+    <ClCompile Include="SourceCode\Manager\game_manager.cpp" />
+    <ClCompile Include="SourceCode\Manager\obj_manager.cpp" />
+    <ClCompile Include="SourceCode\Manager\physics_manager.cpp" />
+    <ClCompile Include="SourceCode\Manager\scene_manager.cpp" />
+    <ClCompile Include="SourceCode\ObjectPool\object_pool_holder.cpp" />
+    <ClCompile Include="SourceCode\Object\main_camera.cpp" />
+    <ClCompile Include="SourceCode\Object\stage.cpp" />
+    <ClCompile Include="SourceCode\Object\player.cpp" />
+    <ClCompile Include="SourceCode\Object\skydome.cpp" />
+    <ClCompile Include="SourceCode\Part\character_collider_creator.cpp" />
+    <ClCompile Include="SourceCode\Part\gauge.cpp" />
+    <ClCompile Include="SourceCode\Part\bone_pos_corrector.cpp" />
+    <ClCompile Include="SourceCode\Part\camera_aim.cpp" />
+    <ClCompile Include="SourceCode\Part\camera_body.cpp" />
+    <ClCompile Include="SourceCode\Part\camera_noise.cpp" />
+    <ClCompile Include="SourceCode\Part\collider.cpp" />
+    <ClCompile Include="SourceCode\Part\graphicer.cpp" />
+    <ClCompile Include="SourceCode\Part\mask_creator.cpp" />
+    <ClCompile Include="SourceCode\Part\screen_creator.cpp" />
+    <ClCompile Include="SourceCode\Part\modeler.cpp" />
+    <ClCompile Include="SourceCode\Part\transform.cpp" />
+    <ClCompile Include="SourceCode\Random\random_generator.cpp" />
+    <ClCompile Include="SourceCode\Scene\play_scene.cpp" />
+    <ClCompile Include="SourceCode\Scene\share_scene.cpp" />
+    <ClCompile Include="SourceCode\ShadowMap\shadow_map.cpp" />
+    <ClCompile Include="SourceCode\Shape\1DShape\point.cpp" />
+    <ClCompile Include="SourceCode\Shape\1DShape\line.cpp" />
+    <ClCompile Include="SourceCode\Shape\1DShape\segment.cpp" />
+    <ClCompile Include="SourceCode\Shape\2DShape\capsule2D.cpp" />
+    <ClCompile Include="SourceCode\Shape\2DShape\circle.cpp" />
+    <ClCompile Include="SourceCode\Shape\2DShape\circumference.cpp" />
+    <ClCompile Include="SourceCode\Shape\2DShape\plane.cpp" />
+    <ClCompile Include="SourceCode\Shape\2DShape\square.cpp" />
+    <ClCompile Include="SourceCode\Shape\2DShape\triangle.cpp" />
+    <ClCompile Include="SourceCode\Shape\3DShape\aabb.cpp" />
+    <ClCompile Include="SourceCode\Shape\3DShape\capsule.cpp" />
+    <ClCompile Include="SourceCode\Shape\3DShape\obb.cpp" />
+    <ClCompile Include="SourceCode\Shape\3DShape\ray_capsule.cpp" />
+    <ClCompile Include="SourceCode\Shape\3DShape\cone.cpp" />
+    <ClCompile Include="SourceCode\Shape\3DShape\sphere.cpp" />
+    <ClCompile Include="SourceCode\State\PlayerState\player_crouch.cpp" />
+    <ClCompile Include="SourceCode\State\PlayerState\player_idle.cpp" />
+    <ClCompile Include="SourceCode\State\PlayerState\player_action_null.cpp" />
+    <ClCompile Include="SourceCode\State\PlayerState\player_state.cpp" />
+    <ClCompile Include="SourceCode\State\PlayerState\player_run.cpp" />
+    <ClCompile Include="SourceCode\State\PlayerState\player_move.cpp" />
+    <ClCompile Include="SourceCode\VirtualCamera\cinemachine_brain.cpp" />
+    <ClCompile Include="SourceCode\VirtualCamera\control_virtual_cameras_controller.cpp" />
+    <ClCompile Include="SourceCode\VirtualCamera\virtual_camera.cpp" />
+    <ClCompile Include="SourceCode\Window\window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SourceCode\Algorithm\algorithm.hpp" />
+    <ClInclude Include="SourceCode\Algorithm\a_star.hpp" />
+    <ClInclude Include="SourceCode\Animator\player_animator.hpp" />
+    <ClInclude Include="SourceCode\Base\animator_base.hpp" />
+    <ClInclude Include="SourceCode\Base\character_base.hpp" />
+    <ClInclude Include="SourceCode\Base\object_pool_base.hpp" />
+    <ClInclude Include="SourceCode\Base\obj_base.hpp" />
+    <ClInclude Include="SourceCode\Base\single_instance_base.hpp" />
+    <ClInclude Include="SourceCode\Base\physical_obj_base.hpp" />
+    <ClInclude Include="SourceCode\Base\shape_base.hpp" />
+    <ClInclude Include="SourceCode\Base\singleton_base.hpp" />
+    <ClInclude Include="SourceCode\Calculation\axes.hpp" />
+    <ClInclude Include="SourceCode\Calculation\collision_calculator.hpp" />
+    <ClInclude Include="SourceCode\Calculation\common_operator.hpp" />
+    <ClInclude Include="SourceCode\Calculation\math.hpp" />
+    <ClInclude Include="SourceCode\Calculation\matrix.hpp" />
+    <ClInclude Include="SourceCode\Calculation\quaternion.hpp" />
+    <ClInclude Include="SourceCode\Calculation\vector_2d.hpp" />
+    <ClInclude Include="SourceCode\Calculation\vector_3d.hpp" />
+    <ClInclude Include="SourceCode\Command\command_handler.hpp" />
+    <ClInclude Include="SourceCode\Concept\common_concepts.hpp" />
+    <ClInclude Include="SourceCode\Concept\input_concepts.hpp" />
+    <ClInclude Include="SourceCode\Concept\scene_concepts.hpp" />
+    <ClInclude Include="SourceCode\Concept\obj_concepts.hpp" />
+    <ClInclude Include="SourceCode\Concept\state_concepts.hpp" />
+    <ClInclude Include="SourceCode\Concept\vector_concepts.hpp" />
+    <ClInclude Include="SourceCode\CSV\csv_loader.hpp" />
+    <ClInclude Include="SourceCode\Data\material_data.hpp" />
+    <ClInclude Include="SourceCode\Data\light_range_attenuation_data.hpp" />
+    <ClInclude Include="SourceCode\Data\font_data.hpp" />
+    <ClInclude Include="SourceCode\Data\collider_data.hpp" />
+    <ClInclude Include="SourceCode\Data\animator_data.hpp" />
+    <ClInclude Include="SourceCode\Data\box_data.hpp" />
+    <ClInclude Include="SourceCode\Data\collider_pair_data.hpp" />
+    <ClInclude Include="SourceCode\Data\input_data.hpp" />
+    <ClInclude Include="SourceCode\Debugger\debugger.hpp" />
+    <ClInclude Include="SourceCode\Drawer\drawer.hpp" />
+    <ClInclude Include="SourceCode\Event\event.hpp" />
+    <ClInclude Include="SourceCode\Event\event_system.hpp" />
+    <ClInclude Include="SourceCode\Font\font_handler.hpp" />
+    <ClInclude Include="SourceCode\GameSystem\game_system_setter.hpp" />
+    <ClInclude Include="SourceCode\GameTime\fps.hpp" />
+    <ClInclude Include="SourceCode\GameTime\game_time_manager.hpp" />
+    <ClInclude Include="SourceCode\Handle\handle_keeper.hpp" />
+    <ClInclude Include="SourceCode\Handle\handle_creator.hpp" />
+    <ClInclude Include="SourceCode\IncludeList\event.hpp" />
+    <ClInclude Include="SourceCode\IncludeList\input.hpp" />
+    <ClInclude Include="SourceCode\IncludeList\shape.hpp" />
+    <ClInclude Include="SourceCode\IncludeList\vector.hpp" />
+    <ClInclude Include="SourceCode\Input\input_checker.hpp" />
+    <ClInclude Include="SourceCode\Interface\i_light.hpp" />
+    <ClInclude Include="SourceCode\Interface\i_poolable.hpp" />
+    <ClInclude Include="SourceCode\Interface\i_scene.hpp" />
+    <ClInclude Include="SourceCode\Interface\i_state.hpp" />
+    <ClInclude Include="SourceCode\Interface\i_state_controller.hpp" />
+    <ClInclude Include="SourceCode\Interface\i_virtual_camera_controller.hpp" />
+    <ClInclude Include="SourceCode\JSON\json_loader.hpp" />
+    <ClInclude Include="SourceCode\Kind\blend_activation_policy_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\box_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\collider_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\command_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\coordinate_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\light_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\device_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\event_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\input_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\mass_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\mouse_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\pad_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\player_anim_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\scene_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\shape_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\sort_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\texture_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\time_kind.hpp" />
+    <ClInclude Include="SourceCode\Kind\virtual_camera_controller_kind.hpp" />
+    <ClInclude Include="SourceCode\Light\spot_light.hpp" />
+    <ClInclude Include="SourceCode\Light\point_light.hpp" />
+    <ClInclude Include="SourceCode\Light\directional_light.hpp" />
+    <ClInclude Include="SourceCode\Light\light_holder.hpp" />
+    <ClInclude Include="SourceCode\Manager\collision_manager.hpp" />
+    <ClInclude Include="SourceCode\Manager\game_manager.hpp" />
+    <ClInclude Include="SourceCode\Manager\obj_manager.hpp" />
+    <ClInclude Include="SourceCode\Manager\physics_manager.hpp" />
+    <ClInclude Include="SourceCode\Manager\scene_manager.hpp" />
+    <ClInclude Include="SourceCode\Name\light_name.hpp" />
+    <ClInclude Include="SourceCode\Name\font_name.hpp" />
+    <ClInclude Include="SourceCode\Name\object_pool_name.hpp" />
+    <ClInclude Include="SourceCode\Name\obj_name.hpp" />
+    <ClInclude Include="SourceCode\ObjectPool\object_pool_holder.hpp" />
+    <ClInclude Include="SourceCode\Object\main_camera.hpp" />
+    <ClInclude Include="SourceCode\Object\stage.hpp" />
+    <ClInclude Include="SourceCode\Object\player.hpp" />
+    <ClInclude Include="SourceCode\Object\skydome.hpp" />
+    <ClInclude Include="SourceCode\Part\character_collider_creator.hpp" />
+    <ClInclude Include="SourceCode\Part\mask_creator.hpp" />
+    <ClInclude Include="SourceCode\Part\gauge.hpp" />
+    <ClInclude Include="SourceCode\Part\bone_pos_corrector.hpp" />
+    <ClInclude Include="SourceCode\Part\camera_aim.hpp" />
+    <ClInclude Include="SourceCode\Part\camera_body.hpp" />
+    <ClInclude Include="SourceCode\Part\camera_noise.hpp" />
+    <ClInclude Include="SourceCode\Part\collider.hpp" />
+    <ClInclude Include="SourceCode\Part\graphicer.hpp" />
+    <ClInclude Include="SourceCode\Part\screen_creator.hpp" />
+    <ClInclude Include="SourceCode\Part\modeler.hpp" />
+    <ClInclude Include="SourceCode\Part\transform.hpp" />
+    <ClInclude Include="SourceCode\Path\animation_path.hpp" />
+    <ClInclude Include="SourceCode\Path\bone_path.hpp" />
+    <ClInclude Include="SourceCode\Path\model_path.hpp" />
+    <ClInclude Include="SourceCode\Random\random_generator.hpp" />
+    <ClInclude Include="SourceCode\Scene\play_scene.hpp" />
+    <ClInclude Include="SourceCode\Scene\share_scene.hpp" />
+    <ClInclude Include="SourceCode\ShadowMap\shadow_map.hpp" />
+    <ClInclude Include="SourceCode\Shape\1DShape\point.hpp" />
+    <ClInclude Include="SourceCode\Shape\1DShape\line.hpp" />
+    <ClInclude Include="SourceCode\Shape\1DShape\segment.hpp" />
+    <ClInclude Include="SourceCode\Shape\2DShape\capsule2D.hpp" />
+    <ClInclude Include="SourceCode\Shape\2DShape\circle.hpp" />
+    <ClInclude Include="SourceCode\Shape\2DShape\circumference.hpp" />
+    <ClInclude Include="SourceCode\Shape\2DShape\plane.hpp" />
+    <ClInclude Include="SourceCode\Shape\2DShape\square.hpp" />
+    <ClInclude Include="SourceCode\Shape\2DShape\triangle.hpp" />
+    <ClInclude Include="SourceCode\Shape\3DShape\aabb.hpp" />
+    <ClInclude Include="SourceCode\Shape\3DShape\capsule.hpp" />
+    <ClInclude Include="SourceCode\Shape\3DShape\obb.hpp" />
+    <ClInclude Include="SourceCode\Shape\3DShape\ray_capsule.hpp" />
+    <ClInclude Include="SourceCode\Shape\3DShape\cone.hpp" />
+    <ClInclude Include="SourceCode\Shape\3DShape\sphere.hpp" />
+    <ClInclude Include="SourceCode\State\PlayerState\player_crouch.hpp" />
+    <ClInclude Include="SourceCode\State\PlayerState\player_idle.hpp" />
+    <ClInclude Include="SourceCode\State\PlayerState\player_action_null.hpp" />
+    <ClInclude Include="SourceCode\State\PlayerState\player_state.hpp" />
+    <ClInclude Include="SourceCode\State\PlayerState\player_run.hpp" />
+    <ClInclude Include="SourceCode\State\PlayerState\player_move.hpp" />
+    <ClInclude Include="SourceCode\Tag\animation_tag.hpp" />
+    <ClInclude Include="SourceCode\Tag\obj_tag.hpp" />
+    <ClInclude Include="SourceCode\VirtualCamera\cinemachine_brain.hpp" />
+    <ClInclude Include="SourceCode\VirtualCamera\control_virtual_cameras_controller.hpp" />
+    <ClInclude Include="SourceCode\VirtualCamera\virtual_camera.hpp" />
+    <ClInclude Include="SourceCode\Window\window.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\JSON\boss (2) (2).json" />
+    <None Include="Data\JSON\boss.json" />
+    <None Include="Data\JSON\control_virtual_cameras_controller.json" />
+    <None Include="Data\JSON\player.json" />
+    <None Include="Data\JSON\stage.json" />
+    <None Include="Data\JSON\zombie.json" />
+    <None Include="data\JSON\houses.json" />
+    <None Include="Data\JSON\patrol_route.json" />
+    <None Include="Data\JSON\font_data.json" />
+    <None Include="Data\JSON\key_number.json" />
+    <None Include="Data\JSON\init_enemies.json" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,257 @@
+{
+  "control_virtual_cameras_controller" : {
+    "camera_aim_offset_basic_speed": 40.0,
+    "max_vertical_input_angle": 60.0,
+    "min_vertical_input_angle": -60.0,
+    "move_speed_with_button": 2.0,
+    "move_speed_with_mouse": 0.1,
+    "move_speed_with_stick": 1.5,
+    "rot_crouch_control_camera": {
+      "aim": {
+        "bias": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "current_aim_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "dead_zone": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "destination_aim_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "horizontal_damping": 0.05,
+        "is_track": false,
+        "rot_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "screen": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "soft_zone": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "tracked_obj_offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "vertical_damping": 0.0
+      },
+      "blend_activation_policy_kind": 0,
+      "body": {
+        "current_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "damping": {
+          "x": 0.015,
+          "y": 0.015,
+          "z": 0.0
+        },
+        "destination_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "follow_offset": {
+          "x": 30.0,
+          "y": 20.0,
+          "z": -70.0
+        },
+        "is_track": false
+      },
+      "name": "rot_crouch_camera",
+      "priority": 1,
+      "transform": {
+        "local_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "rot_stand_control_camera": {
+      "aim": {
+        "bias": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "current_aim_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "dead_zone": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "destination_aim_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "horizontal_damping": 0.05,
+        "is_track": false,
+        "rot_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "screen": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "soft_zone": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "tracked_obj_offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "vertical_damping": 0.0
+      },
+      "blend_activation_policy_kind": 0,
+      "body": {
+        "current_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "damping": {
+          "x": 0.015,
+          "y": 0.015,
+          "z": 0.0
+        },
+        "destination_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "follow_offset": {
+          "x": 30.0,
+          "y": 20.0,
+          "z": -90.0
+        },
+        "is_track": false
+      },
+      "name": "rot_stand_camera",
+      "priority": 0,
+      "transform": {
+        "local_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "tracked_obj_offset_rot_crouch_camera": {
+      "x": 10.0,
+      "y": 10.0,
+      "z": 0.0
+    },
+    "tracked_obj_offset_rot_stand_camera": {
+      "x": 10.0,
+      "y": 10.0,
+      "z": 0.0
+    },
+    "virtual_camera_controller_kind": 0
+  }
+}

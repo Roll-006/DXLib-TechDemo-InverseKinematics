@@ -1,0 +1,39 @@
+{
+  "attack_interval_time": 3.0,
+  "basic_angle": {
+    "x": 0.0,
+    "y": 3.14,
+    "z": 0.0
+  },
+  "basic_scale": 0.3,
+  "collider_data": {
+    "capsule_radius": 8.0,
+    "collision_area_offset": {
+      "x": 0.0,
+      "y": 30.0,
+      "z": 0.0
+    },
+    "collision_area_radius": 40.0,
+    "down_body_trigger_radius": 6.0,
+    "down_leg_trigger_radius": 2.5,
+    "forearm_trigger_radius": 2.2,
+    "visible_fov": 80.0,
+    "hand_trigger_radius": 2.0,
+    "head_trigger_radius": 6.0,
+    "landing_trigger_radius": 6.0,
+    "up_body_trigger_radius": 6.0,
+    "up_leg_trigger_radius": 3.5,
+    "upper_arm_trigger_radius": 2.5,
+    "visible_distance": 300.0
+  },
+  "damage_over_time_start_time": 1.0,
+  "invincible_time": 0.5,
+  "look_dir_offset_speed": 3.0,
+  "mass_kind": 1,
+  "model_path": "Data/Model/Character/Zombie/01/mesh.mv1",
+  "move_dir_offset_speed": 5.0,
+  "run_grab_speed": 110.0,
+  "run_speed": 100.0,
+  "walk_speed": 60.0,
+  "detected_notify_distance" : 400.0
+}

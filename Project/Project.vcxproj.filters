@@ -1,0 +1,818 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="SourceCode\Base\character_base.cpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Base\obj_base.cpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Base\object_pool_base.cpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Base\physical_obj_base.cpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Calculation\collision_calculator.cpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Calculation\math.cpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Calculation\quaternion.cpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Manager\collision_manager.cpp">
+      <Filter>SourceCode\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Manager\game_manager.cpp">
+      <Filter>SourceCode\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Manager\obj_manager.cpp">
+      <Filter>SourceCode\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Manager\physics_manager.cpp">
+      <Filter>SourceCode\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Manager\scene_manager.cpp">
+      <Filter>SourceCode\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Object\main_camera.cpp">
+      <Filter>SourceCode\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Object\stage.cpp">
+      <Filter>SourceCode\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Object\player.cpp">
+      <Filter>SourceCode\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Object\skydome.cpp">
+      <Filter>SourceCode\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\bone_pos_corrector.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\collider.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\modeler.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\transform.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Scene\play_scene.cpp">
+      <Filter>SourceCode\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Window\window.cpp">
+      <Filter>SourceCode\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\1DShape\line.cpp">
+      <Filter>SourceCode\Shape\1DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\1DShape\segment.cpp">
+      <Filter>SourceCode\Shape\1DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\2DShape\circle.cpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\2DShape\circumference.cpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\2DShape\plane.cpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\2DShape\square.cpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\2DShape\triangle.cpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\3DShape\aabb.cpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\3DShape\capsule.cpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\3DShape\obb.cpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\3DShape\sphere.cpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Debugger\debugger.cpp">
+      <Filter>SourceCode\Debugger</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Base\animator_base.cpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Random\random_generator.cpp">
+      <Filter>SourceCode\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\2DShape\capsule2D.cpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\VirtualCamera\virtual_camera.cpp">
+      <Filter>SourceCode\VirtualCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Algorithm\algorithm.cpp">
+      <Filter>SourceCode\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\VirtualCamera\control_virtual_cameras_controller.cpp">
+      <Filter>SourceCode\VirtualCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\camera_aim.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\camera_body.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\camera_noise.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\3DShape\ray_capsule.cpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Algorithm\a_star.cpp">
+      <Filter>SourceCode\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\graphicer.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Input\input_checker.cpp">
+      <Filter>SourceCode\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\ObjectPool\object_pool_holder.cpp">
+      <Filter>SourceCode\ObjectPool</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Handle\handle_keeper.cpp">
+      <Filter>SourceCode\Handle</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameSystem\game_system_setter.cpp">
+      <Filter>SourceCode\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Command\command_handler.cpp">
+      <Filter>SourceCode\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\ShadowMap\shadow_map.cpp">
+      <Filter>SourceCode\ShadowMap</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Drawer\drawer.cpp">
+      <Filter>SourceCode\Drawer</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameTime\fps.cpp">
+      <Filter>SourceCode\GameTime</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameTime\game_time_manager.cpp">
+      <Filter>SourceCode\GameTime</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\VirtualCamera\cinemachine_brain.cpp">
+      <Filter>SourceCode\VirtualCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\gauge.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\character_collider_creator.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\screen_creator.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\JSON\json_loader.cpp">
+      <Filter>SourceCode\JSON</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Part\mask_creator.cpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\main.cpp">
+      <Filter>SourceCode</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\3DShape\cone.cpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Shape\1DShape\point.cpp">
+      <Filter>SourceCode\Shape\1DShape</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Font\font_handler.cpp">
+      <Filter>SourceCode\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Light\light_holder.cpp">
+      <Filter>SourceCode\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Light\directional_light.cpp">
+      <Filter>SourceCode\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Light\spot_light.cpp">
+      <Filter>SourceCode\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Light\point_light.cpp">
+      <Filter>SourceCode\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Animator\player_animator.cpp">
+      <Filter>SourceCode\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\State\PlayerState\player_crouch.cpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\State\PlayerState\player_idle.cpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\State\PlayerState\player_state.cpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\State\PlayerState\player_run.cpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\State\PlayerState\player_move.cpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\State\PlayerState\player_action_null.cpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Scene\share_scene.cpp">
+      <Filter>SourceCode\Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SourceCode\Base\character_base.hpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Base\obj_base.hpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Base\object_pool_base.hpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Base\single_instance_base.hpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Base\physical_obj_base.hpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Base\shape_base.hpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Base\singleton_base.hpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Calculation\axes.hpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Calculation\collision_calculator.hpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Calculation\common_operator.hpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Calculation\math.hpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Calculation\matrix.hpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Calculation\quaternion.hpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Calculation\vector_2d.hpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Calculation\vector_3d.hpp">
+      <Filter>SourceCode\Calculation</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Concept\common_concepts.hpp">
+      <Filter>SourceCode\Concept</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Concept\input_concepts.hpp">
+      <Filter>SourceCode\Concept</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Concept\obj_concepts.hpp">
+      <Filter>SourceCode\Concept</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Concept\vector_concepts.hpp">
+      <Filter>SourceCode\Concept</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Data\animator_data.hpp">
+      <Filter>SourceCode\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Data\box_data.hpp">
+      <Filter>SourceCode\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Data\collider_pair_data.hpp">
+      <Filter>SourceCode\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Data\input_data.hpp">
+      <Filter>SourceCode\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Manager\collision_manager.hpp">
+      <Filter>SourceCode\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Manager\game_manager.hpp">
+      <Filter>SourceCode\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Manager\obj_manager.hpp">
+      <Filter>SourceCode\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Manager\physics_manager.hpp">
+      <Filter>SourceCode\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Manager\scene_manager.hpp">
+      <Filter>SourceCode\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Object\main_camera.hpp">
+      <Filter>SourceCode\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Object\stage.hpp">
+      <Filter>SourceCode\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Object\player.hpp">
+      <Filter>SourceCode\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Object\skydome.hpp">
+      <Filter>SourceCode\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\bone_pos_corrector.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\collider.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\modeler.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\transform.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Scene\play_scene.hpp">
+      <Filter>SourceCode\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Window\window.hpp">
+      <Filter>SourceCode\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\1DShape\line.hpp">
+      <Filter>SourceCode\Shape\1DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\1DShape\segment.hpp">
+      <Filter>SourceCode\Shape\1DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\2DShape\circle.hpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\2DShape\circumference.hpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\2DShape\plane.hpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\2DShape\square.hpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\2DShape\triangle.hpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\3DShape\aabb.hpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\3DShape\capsule.hpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\3DShape\obb.hpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\3DShape\sphere.hpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Debugger\debugger.hpp">
+      <Filter>SourceCode\Debugger</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Base\animator_base.hpp">
+      <Filter>SourceCode\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Random\random_generator.hpp">
+      <Filter>SourceCode\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\2DShape\capsule2D.hpp">
+      <Filter>SourceCode\Shape\2DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\VirtualCamera\virtual_camera.hpp">
+      <Filter>SourceCode\VirtualCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Algorithm\algorithm.hpp">
+      <Filter>SourceCode\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\VirtualCamera\control_virtual_cameras_controller.hpp">
+      <Filter>SourceCode\VirtualCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\camera_aim.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\camera_body.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\camera_noise.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\3DShape\ray_capsule.hpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Algorithm\a_star.hpp">
+      <Filter>SourceCode\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\graphicer.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Interface\i_state.hpp">
+      <Filter>SourceCode\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Input\input_checker.hpp">
+      <Filter>SourceCode\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Concept\state_concepts.hpp">
+      <Filter>SourceCode\Concept</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\ObjectPool\object_pool_holder.hpp">
+      <Filter>SourceCode\ObjectPool</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Handle\handle_keeper.hpp">
+      <Filter>SourceCode\Handle</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameSystem\game_system_setter.hpp">
+      <Filter>SourceCode\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Command\command_handler.hpp">
+      <Filter>SourceCode\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Handle\handle_creator.hpp">
+      <Filter>SourceCode\Handle</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Interface\i_poolable.hpp">
+      <Filter>SourceCode\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\ShadowMap\shadow_map.hpp">
+      <Filter>SourceCode\ShadowMap</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Drawer\drawer.hpp">
+      <Filter>SourceCode\Drawer</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameTime\fps.hpp">
+      <Filter>SourceCode\GameTime</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameTime\game_time_manager.hpp">
+      <Filter>SourceCode\GameTime</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Interface\i_virtual_camera_controller.hpp">
+      <Filter>SourceCode\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\VirtualCamera\cinemachine_brain.hpp">
+      <Filter>SourceCode\VirtualCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\gauge.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Interface\i_state_controller.hpp">
+      <Filter>SourceCode\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\character_collider_creator.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\screen_creator.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Tag\animation_tag.hpp">
+      <Filter>SourceCode\Tag</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Tag\obj_tag.hpp">
+      <Filter>SourceCode\Tag</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Path\animation_path.hpp">
+      <Filter>SourceCode\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Path\bone_path.hpp">
+      <Filter>SourceCode\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Path\model_path.hpp">
+      <Filter>SourceCode\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Name\obj_name.hpp">
+      <Filter>SourceCode\Name</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Name\object_pool_name.hpp">
+      <Filter>SourceCode\Name</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\blend_activation_policy_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\box_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\collider_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\command_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\coordinate_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\device_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\event_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\input_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\mass_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\mouse_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\pad_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\player_anim_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\scene_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\shape_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\sort_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\texture_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\time_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\virtual_camera_controller_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\CSV\csv_loader.hpp">
+      <Filter>SourceCode\CSV</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Event\event.hpp">
+      <Filter>SourceCode\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\IncludeList\input.hpp">
+      <Filter>SourceCode\IncludeList</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\IncludeList\shape.hpp">
+      <Filter>SourceCode\IncludeList</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\IncludeList\vector.hpp">
+      <Filter>SourceCode\IncludeList</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Data\collider_data.hpp">
+      <Filter>SourceCode\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\JSON\json_loader.hpp">
+      <Filter>SourceCode\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Part\mask_creator.hpp">
+      <Filter>SourceCode\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Interface\i_scene.hpp">
+      <Filter>SourceCode\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Concept\scene_concepts.hpp">
+      <Filter>SourceCode\Concept</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Event\event_system.hpp">
+      <Filter>SourceCode\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\3DShape\cone.hpp">
+      <Filter>SourceCode\Shape\3DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Shape\1DShape\point.hpp">
+      <Filter>SourceCode\Shape\1DShape</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\IncludeList\event.hpp">
+      <Filter>SourceCode\IncludeList</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Data\font_data.hpp">
+      <Filter>SourceCode\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Font\font_handler.hpp">
+      <Filter>SourceCode\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Name\font_name.hpp">
+      <Filter>SourceCode\Name</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Light\light_holder.hpp">
+      <Filter>SourceCode\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Light\directional_light.hpp">
+      <Filter>SourceCode\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Kind\light_kind.hpp">
+      <Filter>SourceCode\Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Light\spot_light.hpp">
+      <Filter>SourceCode\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Light\point_light.hpp">
+      <Filter>SourceCode\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Interface\i_light.hpp">
+      <Filter>SourceCode\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Data\light_range_attenuation_data.hpp">
+      <Filter>SourceCode\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Name\light_name.hpp">
+      <Filter>SourceCode\Name</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Animator\player_animator.hpp">
+      <Filter>SourceCode\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Data\material_data.hpp">
+      <Filter>SourceCode\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\State\PlayerState\player_crouch.hpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\State\PlayerState\player_idle.hpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\State\PlayerState\player_state.hpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\State\PlayerState\player_run.hpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\State\PlayerState\player_move.hpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\State\PlayerState\player_action_null.hpp">
+      <Filter>SourceCode\State\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Scene\share_scene.hpp">
+      <Filter>SourceCode\Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="SourceCode">
+      <UniqueIdentifier>{6834a87f-295a-41cb-aaaa-12107b7b13ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Algorithm">
+      <UniqueIdentifier>{b0890834-20a2-48aa-b030-750bd28f8af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Base">
+      <UniqueIdentifier>{56ace882-0c19-4d74-887a-e7b8e785f829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Calculation">
+      <UniqueIdentifier>{3983031e-056b-4d1a-a00f-c1acc90bf560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Command">
+      <UniqueIdentifier>{d5ed3af6-7b23-411d-ab3e-44150fb5ace3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Concept">
+      <UniqueIdentifier>{a9c774d0-5df2-4b66-8aa2-945d950db781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\CSV">
+      <UniqueIdentifier>{aa18a683-8198-4225-be40-2831c615d11f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Data">
+      <UniqueIdentifier>{5a2c6f1c-a568-4987-8934-7f3f80ed2bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Debugger">
+      <UniqueIdentifier>{0f578ace-5d63-4ed1-91d5-90e33a16cf7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Drawer">
+      <UniqueIdentifier>{0ad1cdd1-f9f1-4f0c-8cec-bf613a662d11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Event">
+      <UniqueIdentifier>{f5b974f8-f979-4048-b2ca-49cde3426995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\GameSystem">
+      <UniqueIdentifier>{9c2a5154-d2f7-4994-943f-afea0c330812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\GameTime">
+      <UniqueIdentifier>{2bb7eee7-c5b3-48ad-a6f8-72c884dfb3b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Handle">
+      <UniqueIdentifier>{cfc4f451-f315-4d70-a0c8-344f9afc963d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Input">
+      <UniqueIdentifier>{6e63f400-6b05-4fc8-a6aa-4c6d33790181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Interface">
+      <UniqueIdentifier>{ca30a1cf-6f57-4e96-a660-dd84bdc29e45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Manager">
+      <UniqueIdentifier>{69894637-334e-46d6-be72-079330c80427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Name">
+      <UniqueIdentifier>{c3148a31-6123-4086-b761-3edd4fe5f420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Object">
+      <UniqueIdentifier>{12318b27-d5b3-41f7-b2c0-6e3e27ab8d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\ObjectPool">
+      <UniqueIdentifier>{babb64c0-15ce-4652-be32-4fda876508c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Path">
+      <UniqueIdentifier>{ce592a38-5a0e-4681-97e6-ec115ff7e61a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Random">
+      <UniqueIdentifier>{d4a7cfb9-bc76-4840-bd83-b43643529fba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Scene">
+      <UniqueIdentifier>{47238515-00d6-486e-bcf4-f6f55f21cce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\ShadowMap">
+      <UniqueIdentifier>{42ae97fb-a9d7-47a3-b9b8-61b541d541e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Shape">
+      <UniqueIdentifier>{2694cdd7-3230-4767-9c43-c6a55e47da5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Shape\1DShape">
+      <UniqueIdentifier>{56bc29da-2db5-4b2a-8e94-09d5fffb4bd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Shape\2DShape">
+      <UniqueIdentifier>{4b13d9b8-f21f-434a-aa12-561611daf8ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Shape\3DShape">
+      <UniqueIdentifier>{ac75a37e-b63a-4367-aa7b-75ba0c9cc8f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\State">
+      <UniqueIdentifier>{9a691bb4-740c-48d4-baec-fd67b8b9b808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Tag">
+      <UniqueIdentifier>{cd4f92e3-b298-4e4a-9752-61379ba99845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\VirtualCamera">
+      <UniqueIdentifier>{81d6ad34-35fe-4a8d-a1cf-1c9d3f946d67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Window">
+      <UniqueIdentifier>{209348fb-11d3-4b60-abc5-489ba6ddecc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON">
+      <UniqueIdentifier>{644deba4-75e9-4125-a24c-8d5a78fed6e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Kind">
+      <UniqueIdentifier>{72135338-3c4c-44c1-a81b-ef11a7ace830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Part">
+      <UniqueIdentifier>{c6964f06-9b8c-446a-8f44-3299598a3b7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\JSON">
+      <UniqueIdentifier>{3eab40b7-60e6-487a-879b-9b1e3022aeb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Font">
+      <UniqueIdentifier>{7880147d-1fd2-415a-9cd5-5d89b1d5bf9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Light">
+      <UniqueIdentifier>{4fba4c18-e475-45c5-861d-5ac0fe65551f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\Animator">
+      <UniqueIdentifier>{46e62084-03bc-49de-85b0-0989e7e3f1af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\IncludeList">
+      <UniqueIdentifier>{a9b5adeb-15db-4ac4-822d-1b42782f9731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\State\PlayerState">
+      <UniqueIdentifier>{164ed880-9408-4481-810d-1bb869894ec2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\JSON\key_number.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="Data\JSON\font_data.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="Data\JSON\init_enemies.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="Data\JSON\patrol_route.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="data\JSON\houses.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="Data\JSON\zombie.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="Data\JSON\boss.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="Data\JSON\boss (2) (2).json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="Data\JSON\control_virtual_cameras_controller.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="Data\JSON\player.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="Data\JSON\stage.json">
+      <Filter>JSON</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,34 @@
+{
+  "font_data": {
+    "explanatory_text": {
+      "font_path": "游ゴシック Medium",
+      "size": 24,
+      "thick": 2,
+      "type": -1,
+      "char_set": -1,
+      "edge_size": -1,
+      "italic": false,
+      "handle": -1
+    },
+    "select_text": {
+      "font_path": "Yu Gothic UI",
+      "size": 110,
+      "thick": 7,
+      "type": -1,
+      "char_set": -1,
+      "edge_size": -1,
+      "italic": false,
+      "handle": -1
+    },
+    "change_scene_text": {
+      "font_path": "Calibri Light",
+      "size": 55,
+      "thick": 4,
+      "type": -1,
+      "char_set": -1,
+      "edge_size": -1,
+      "italic": false,
+      "handle": -1
+    }
+  }
+}
