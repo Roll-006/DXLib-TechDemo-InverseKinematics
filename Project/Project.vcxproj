@@ -256,6 +256,8 @@
     <ClInclude Include="SourceCode\Data\collider_pair_data.hpp" />
     <ClInclude Include="SourceCode\Data\input_data.hpp" />
     <ClInclude Include="SourceCode\Debugger\debugger.hpp" />
+    <ClInclude Include="SourceCode\Debugger\model_frame_debug.cpp" />
+    <ClInclude Include="SourceCode\Debugger\model_frame_debug.hpp" />
     <ClInclude Include="SourceCode\Drawer\drawer.hpp" />
     <ClInclude Include="SourceCode\Event\event.hpp" />
     <ClInclude Include="SourceCode\Event\event_system.hpp" />
@@ -362,7 +364,7 @@
     <ClInclude Include="SourceCode\Window\window.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\JSON\boss (2) (2).json" />
+    <None Include="Data\JSON\mixamo_bone_hierarchy.json" />
     <None Include="Data\JSON\boss.json" />
     <None Include="Data\JSON\control_virtual_cameras_controller.json" />
     <None Include="Data\JSON\player.json" />

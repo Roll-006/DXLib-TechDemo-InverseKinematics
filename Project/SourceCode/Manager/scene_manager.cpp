@@ -17,6 +17,7 @@ void SceneManager::Update()
 {
 	InputChecker	::GetInstance()->Update();
 	CommandHandler	::GetInstance()->Update();
+	Debugger		::GetInstance()->Update();
 
 	ChangeScene();
 
@@ -45,6 +46,7 @@ void SceneManager::DrawToShadowMap() const
 void SceneManager::Draw() const
 {
 	m_drawer->Draw(m_current_scene);
+	Debugger::GetInstance()->Draw();
 }
 
 void SceneManager::ChangeScene()

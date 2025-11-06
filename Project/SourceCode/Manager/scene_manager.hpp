@@ -1,5 +1,6 @@
 #pragma once
 #include "../Drawer/drawer.hpp"
+#include "../Debugger/debugger.hpp"
 
 #include "../Scene/share_scene.hpp"
 #include "../Scene/play_scene.hpp"

@@ -47,6 +47,7 @@ static struct MixamoBonePath
 	const TCHAR* LEFT_HAND_PINKY_1		= "mixamorig:LeftHandPinky1";
 	const TCHAR* LEFT_HAND_PINKY_2		= "mixamorig:LeftHandPinky2";
 	const TCHAR* LEFT_HAND_PINKY_3		= "mixamorig:LeftHandPinky3";
+	const TCHAR* LEFT_HAND_PINKY_4		= "mixamorig:LeftHandPinky4";
 	const TCHAR* LEFT_HAND_PINKY_4_END	= "mixamorig:LeftHandPinky4_end";
 
 

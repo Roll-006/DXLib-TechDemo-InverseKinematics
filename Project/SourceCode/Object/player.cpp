@@ -2,6 +2,8 @@
 #include "../Command/command_handler.hpp"
 #include "../State/PlayerState/player_state.hpp"
 #include "../JSON/json_loader.hpp"
+#include "../Debugger/model_frame_debug.hpp"
+#include "../DxlibHelper_h/dxlib_helper.h"
 
 Player::Player() :
 	CharacterBase(ObjName.PLAYER, ObjTag.PLAYER),
@@ -70,7 +72,9 @@ void Player::Draw() const
 {
 	if (!IsActive()) { return; }
 
-	m_modeler->Draw();
+	//m_modeler->Draw();
+	model_frame_debug::DrawFrames(m_modeler->GetModelHandle(), true, true, true, false);
+	//DxLibHelper::DrawModelFrames(m_modeler->GetModelHandle(), "", 0.04f, 1.5f);
 
 	//DrawColliders();
 }

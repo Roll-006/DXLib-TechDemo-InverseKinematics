@@ -2,8 +2,9 @@
 
 CommandHandler::CommandHandler()
 {
-	m_trigger_count[TimeKind::kCurrent][CommandKind::kRun]		= 0;
-	m_trigger_count[TimeKind::kCurrent][CommandKind::kCrouch]	= 0;
+	m_trigger_count[TimeKind::kCurrent][CommandKind::kRun]				= 0;
+	m_trigger_count[TimeKind::kCurrent][CommandKind::kCrouch]			= 0;
+	m_trigger_count[TimeKind::kCurrent][CommandKind::kChangeDebugMode]	= 0;
 
 	// ‰Šúİ’è
 	InitKeyCommand();

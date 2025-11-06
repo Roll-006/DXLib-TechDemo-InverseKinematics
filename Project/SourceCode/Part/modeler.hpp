@@ -25,9 +25,9 @@ public:
 	/// @brief MEMO : 通常描画時に適用されるが、武器などがモデルの行列情報を基準とするため先行して適用
 	void ApplyMatrix() const;
 
-	[[nodiscard]] int						 GetModelHandle()		const { return m_model_handle; }
-	[[nodiscard]] float						 GetOpacity()			const { return m_opacity; }
-	[[nodiscard]] std::shared_ptr<Transform> GetTransform()			const { return m_transform; }
+	[[nodiscard]] int						 GetModelHandle()	const { return m_model_handle; }
+	[[nodiscard]] float						 GetOpacity()		const { return m_opacity; }
+	[[nodiscard]] std::shared_ptr<Transform> GetTransform()		const { return m_transform; }
 
 private:
 	int				m_model_handle;

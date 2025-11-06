@@ -654,6 +654,12 @@
     <ClInclude Include="SourceCode\Scene\share_scene.hpp">
       <Filter>SourceCode\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\Debugger\model_frame_debug.cpp">
+      <Filter>SourceCode\Debugger</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Debugger\model_frame_debug.hpp">
+      <Filter>SourceCode\Debugger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="SourceCode">
@@ -802,7 +808,7 @@
     <None Include="Data\JSON\boss.json">
       <Filter>JSON</Filter>
     </None>
-    <None Include="Data\JSON\boss (2) (2).json">
+    <None Include="Data\JSON\mixamo_bone_hierarchy.json">
       <Filter>JSON</Filter>
     </None>
     <None Include="Data\JSON\control_virtual_cameras_controller.json">
