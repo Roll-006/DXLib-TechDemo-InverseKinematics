@@ -3,14 +3,14 @@
 #include <algorithm>
 #include <nlohmann/json.hpp>
 #include <DxLib.h>
+#include <Vector/vector_3d.hpp>
 
-#include "vector_3d.hpp"
 
 struct Quaternion;
 
 namespace quat
 {
-	enum class AxesKind
+	enum class AxisKind
 	{
 		kX,
 		kY,

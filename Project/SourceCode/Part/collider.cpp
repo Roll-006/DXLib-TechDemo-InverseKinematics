@@ -5,7 +5,7 @@ Collider::Collider(const ColliderKind kind, const std::shared_ptr<ShapeBase>& sh
 	m_kind					(kind),
 	m_shape					(shape),
 	m_model_handle			(-1),
-	m_is_closest_only_hit	(kind == ColliderKind::kRayCast		  ? true : false),
+	m_is_closest_only_hit	(kind == ColliderKind::kRay || kind == ColliderKind::kProjectRay ? true : false),
 	m_is_one_collision		(kind == ColliderKind::kAttackTrigger ? true : false),
 	m_owner_obj				(owner_obj)
 {
@@ -16,7 +16,7 @@ Collider::Collider(const ColliderKind kind, const std::shared_ptr<ShapeBase>& sh
 	m_kind					(kind),
 	m_shape					(shape),
 	m_model_handle			(-1),
-	m_is_closest_only_hit	(kind == ColliderKind::kRayCast ? is_closest_only_hit : false),
+	m_is_closest_only_hit	(kind == ColliderKind::kRay || kind == ColliderKind::kProjectRay ? is_closest_only_hit : false),
 	m_is_one_collision		(kind == ColliderKind::kAttackTrigger ? true : false),
 	m_owner_obj				(owner_obj)
 {
@@ -42,7 +42,7 @@ Collider::~Collider()
 
 void Collider::EnableAllRayCastHit()
 {
-	if (m_kind == ColliderKind::kRayCast)
+	if (m_kind == ColliderKind::kRay || m_kind == ColliderKind::kProjectRay)
 	{
 		m_is_closest_only_hit = false;
 	}
@@ -50,7 +50,7 @@ void Collider::EnableAllRayCastHit()
 
 void Collider::EnableClosestOnlyRayCastHit()
 {
-	if (m_kind == ColliderKind::kRayCast)
+	if (m_kind == ColliderKind::kRay || m_kind == ColliderKind::kProjectRay)
 	{
 		m_is_closest_only_hit = true;
 	}
@@ -60,7 +60,8 @@ void Collider::JudgeValidShape()
 {
 	switch (m_kind)
 	{
-	case ColliderKind::kRayCast:
+	case ColliderKind::kRay:
+	case ColliderKind::kProjectRay:
 		assert(m_shape->GetShapeKind() == ShapeKind::kSegment);
 		break;
 

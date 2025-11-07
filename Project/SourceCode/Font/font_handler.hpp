@@ -2,8 +2,8 @@
 #include <nlohmann/json.hpp>
 #include <unordered_map>
 #include <DxLib.h>
+#include <JSON/json_loader.hpp>
 
-#include "../JSON/json_loader.hpp"
 #include "../Base/singleton_base.hpp"
 #include "../Name/font_name.hpp"
 #include "../Data/font_data.hpp"

@@ -22,20 +22,36 @@ public:
 
 	[[nodiscard]] VECTOR GetVelocity()		 const			{ return m_velocity; }
 	[[nodiscard]] VirtualCameraControllerKind GetVirtualCameraControllerKind() const override;
-	[[nodiscard]] std::shared_ptr<VirtualCamera> GetHaveVirtualCamera(const std::string& name) const override;
-	[[nodiscard]] std::vector<std::shared_ptr<VirtualCamera>> GetHaveAllVirtualCamera()  const override;
 	[[nodiscard]] int  GetControllerHandle() const override { return m_controller_handle; }
 	[[nodiscard]] bool IsActive()			 const override { return m_is_active; }
 
 private:
-	void Move();
+	#pragma region 回転カメラ
+	void MoveRotCamera();
 
-	void CalcMoveDirFromPad();
-	void CalcMoveDirFromMouse();
-	void CalcMoveDirFromCommand();
+	void CalcRotCameraMoveDirFromPad();
+	void CalcRotCameraMoveDirFromMouse();
+	void CalcRotCameraMoveDirFromCommand();
 
-	void CalcAimPos();
-	void CalcInputAngle();
+	void CalcRotCameraAimPos();
+	void CalcRotCameraInputAngle();
+
+	void ApplyAngleRotCamera();
+	#pragma endregion
+
+
+	#pragma region 自由移動カメラ
+	void JudgeUseFreedomCamera();
+
+	void MoveFreedomCamera();
+
+	void CalcFreedomCameraInputAngle();
+
+	void ApplyAngleFreedomCamera();
+
+	[[nodiscard]] VECTOR GetMoveForward();
+	[[nodiscard]] VECTOR GetMoveRight();
+	#pragma endregion
 
 private:
 	VirtualCameraControllerKind				virtual_camera_controller_kind;
@@ -49,17 +65,21 @@ private:
 
 	int										m_controller_handle;
 	bool									m_is_active;
+	std::unordered_map<TimeKind, bool>		m_is_using_freedom_camera;
 
 	Player&									m_player;
 	std::shared_ptr<VirtualCamera>			m_rot_stand_control_camera;			// 回転カメラ(立ち状態)
 	std::shared_ptr<VirtualCamera>			m_rot_crouch_control_camera;		// 回転カメラ(しゃがみ状態)
+	std::shared_ptr<VirtualCamera>			m_freedom_control_camera;			// 自由移動カメラ
 
-	std::shared_ptr<Transform>				m_aim_transform;					// カメラが起点とするトランスフォーム
+	std::shared_ptr<Transform>				m_rot_aim_transform;				// 回転カメラが起点とするトランスフォーム
+	std::shared_ptr<Transform>				m_freedom_aim_transform;			// 自由移動カメラが起点とするトランスフォーム
 	VECTOR									m_current_aim_pos;					// 現在の起点座標
 
 	VECTOR									m_move_dir;							// 移動方向
 	VECTOR									m_velocity;							// 速度ベクトル
-	std::unordered_map<TimeKind, VECTOR>	m_input_angle;						// 入力角度
+	VECTOR									m_rot_camera_input_angle;			// 入力角度
+	VECTOR									m_freedom_camera_input_angle;		// 入力角度
 
 	friend void from_json(const nlohmann::json& data, ControlVirtualCamerasController& cameras_controller);
 	friend void to_json  (nlohmann::json& data, const ControlVirtualCamerasController& cameras_controller);
@@ -78,6 +98,7 @@ inline void from_json(const nlohmann::json& data, ControlVirtualCamerasControlle
 	data.at("move_speed_with_button")				.get_to(cameras_controller.move_speed_with_button);
 	data.at("rot_stand_control_camera")				.get_to(*cameras_controller.m_rot_stand_control_camera.get());
 	data.at("rot_crouch_control_camera")			.get_to(*cameras_controller.m_rot_crouch_control_camera.get());
+	data.at("freedom_control_camera")				.get_to(*cameras_controller.m_freedom_control_camera.get());
 }
 
 inline void to_json(nlohmann::json& data, const ControlVirtualCamerasController& cameras_controller)
@@ -93,6 +114,7 @@ inline void to_json(nlohmann::json& data, const ControlVirtualCamerasController&
 		{"move_speed_with_button",					cameras_controller.move_speed_with_button},
 		{"rot_stand_control_camera",				*cameras_controller.m_rot_stand_control_camera.get()},
 		{"rot_crouch_control_camera",				*cameras_controller.m_rot_crouch_control_camera.get()},
+		{"freedom_control_camera",					*cameras_controller.m_freedom_control_camera.get()},
 	};
 }
 #pragma endregion

@@ -14,11 +14,10 @@ Debugger::~Debugger()
 
 void Debugger::JudgeUseDebugMode()
 {
-	const auto command = CommandHandler::GetInstance();
-	if (   command->IsExecute(CommandKind::kDebugTrigger1,   TimeKind::kCurrent)
-		&& command->IsExecute(CommandKind::kDebugTrigger2,   TimeKind::kCurrent)
-		&& command->IsExecute(CommandKind::kChangeDebugMode, TimeKind::kCurrent))
+	const auto input = InputChecker::GetInstance();
+	if (input->IsInput(KEY_INPUT_LSHIFT) && input->IsInput(KEY_INPUT_SPACE) && input->GetInputState(KEY_INPUT_RETURN) == InputState::kSingle)
 	{
+		++m_debug_count;
 		m_is_using_debug = m_debug_count % 2 == 0 ? true : false;
 	}
 }

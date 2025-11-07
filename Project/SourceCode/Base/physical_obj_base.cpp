@@ -3,6 +3,7 @@
 PhysicalObjBase::PhysicalObjBase(const std::string& name, const std::string& tag) :
 	ObjBase							(name, tag),
 	mass_kind						(MassKind::kLight),
+	m_project_pos					(std::nullopt),
 	m_velocity						(v3d::GetZeroV()),
 	m_move_velocity					(v3d::GetZeroV()),
 	m_fall_velocity					(v3d::GetZeroV()),
@@ -136,7 +137,7 @@ void PhysicalObjBase::ProjectionVelocity()
 	std::vector<std::pair<int, float>>	distance;
 	for (size_t i = 0; i < all_triangles.size(); ++i)
 	{
-		triangles[i] = all_triangles.at(i);
+		triangles[static_cast<int>(i)] = all_triangles.at(i);
 
 		const auto dist = math::GetDistanceTriangleToSphere(all_triangles.at(i), *std::dynamic_pointer_cast<Sphere>(landing_trigger->GetShape()));
 		distance.emplace_back(std::make_pair(i, dist));

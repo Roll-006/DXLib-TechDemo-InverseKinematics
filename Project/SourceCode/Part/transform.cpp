@@ -283,22 +283,22 @@ MATRIX Transform::GetScaleMatrix(const CoordinateKind coord_kind)
 
 VECTOR Transform::GetRight(const CoordinateKind coord_kind)
 {
-	return GetAxes(coord_kind).x_axis;
+	return GetAxis(coord_kind).x_axis;
 }
 
 VECTOR Transform::GetUp(const CoordinateKind coord_kind)
 {
-	return GetAxes(coord_kind).y_axis;
+	return GetAxis(coord_kind).y_axis;
 }
 
 VECTOR Transform::GetForward(const CoordinateKind coord_kind)
 {
-	return GetAxes(coord_kind).z_axis;
+	return GetAxis(coord_kind).z_axis;
 }
 
-Axes Transform::GetAxes(const CoordinateKind coord_kind)
+Axis Transform::GetAxis(const CoordinateKind coord_kind)
 {
-	return math::ConvertRotMatrixToAxes(GetRotMatrix(coord_kind));
+	return math::ConvertRotMatrixToAxis(GetRotMatrix(coord_kind));
 }
 
 VECTOR Transform::GetXYZEulerAngles(const CoordinateKind coord_kind)

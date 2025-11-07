@@ -73,7 +73,6 @@ inline void from_json(const nlohmann::json& data, VirtualCamera& virtual_camera)
 	data.at("blend_activation_policy_kind")	.get_to(virtual_camera.blend_activation_policy_kind);
 	data.at("body")							.get_to(*virtual_camera.m_body.get());
 	data.at("aim")							.get_to(*virtual_camera.m_aim.get());
-	data.at("transform")					.get_to(*virtual_camera.m_transform.get());
 }
 
 inline void to_json(nlohmann::json& data, const VirtualCamera& virtual_camera)
@@ -85,7 +84,6 @@ inline void to_json(nlohmann::json& data, const VirtualCamera& virtual_camera)
 		{"blend_activation_policy_kind",	virtual_camera.blend_activation_policy_kind},
 		{"body",							*virtual_camera.m_body.get()},
 		{"aim",								*virtual_camera.m_aim.get()},
-		{"transform",						*virtual_camera.m_transform.get()}
 	};
 }
 #pragma endregion

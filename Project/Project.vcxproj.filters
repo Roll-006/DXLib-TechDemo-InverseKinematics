@@ -178,9 +178,6 @@
     <ClCompile Include="SourceCode\Part\screen_creator.cpp">
       <Filter>SourceCode\Part</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\JSON\json_loader.cpp">
-      <Filter>SourceCode\JSON</Filter>
-    </ClCompile>
     <ClCompile Include="SourceCode\Part\mask_creator.cpp">
       <Filter>SourceCode\Part</Filter>
     </ClCompile>
@@ -255,9 +252,6 @@
     <ClInclude Include="SourceCode\Base\singleton_base.hpp">
       <Filter>SourceCode\Base</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\Calculation\axes.hpp">
-      <Filter>SourceCode\Calculation</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\Calculation\collision_calculator.hpp">
       <Filter>SourceCode\Calculation</Filter>
     </ClInclude>
@@ -267,16 +261,7 @@
     <ClInclude Include="SourceCode\Calculation\math.hpp">
       <Filter>SourceCode\Calculation</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\Calculation\matrix.hpp">
-      <Filter>SourceCode\Calculation</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\Calculation\quaternion.hpp">
-      <Filter>SourceCode\Calculation</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\Calculation\vector_2d.hpp">
-      <Filter>SourceCode\Calculation</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\Calculation\vector_3d.hpp">
       <Filter>SourceCode\Calculation</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\Concept\common_concepts.hpp">
@@ -564,14 +549,8 @@
     <ClInclude Include="SourceCode\IncludeList\shape.hpp">
       <Filter>SourceCode\IncludeList</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\IncludeList\vector.hpp">
-      <Filter>SourceCode\IncludeList</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\Data\collider_data.hpp">
       <Filter>SourceCode\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\JSON\json_loader.hpp">
-      <Filter>SourceCode\JSON</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\Part\mask_creator.hpp">
       <Filter>SourceCode\Part</Filter>
@@ -654,11 +633,26 @@
     <ClInclude Include="SourceCode\Scene\share_scene.hpp">
       <Filter>SourceCode\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\Debugger\mixamo_helper.cpp">
-      <Filter>SourceCode\Debugger</Filter>
+    <ClInclude Include="OriginalLibrary\Axis\axis.hpp">
+      <Filter>OriginalLibrary\Axis</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\Debugger\mixamo_helper.hpp">
-      <Filter>SourceCode\Debugger</Filter>
+    <ClInclude Include="OriginalLibrary\Vector\vector_2d.hpp">
+      <Filter>OriginalLibrary\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="OriginalLibrary\Vector\vector_3d.hpp">
+      <Filter>OriginalLibrary\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="OriginalLibrary\Vector\vector_concepts.hpp">
+      <Filter>OriginalLibrary\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="OriginalLibrary\MixamoHelper\mixamo_helper.hpp">
+      <Filter>OriginalLibrary\MixamoHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="OriginalLibrary\Matrix\matrix.hpp">
+      <Filter>OriginalLibrary\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="OriginalLibrary\JSON\json_loader.hpp">
+      <Filter>OriginalLibrary\JSON</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -767,9 +761,6 @@
     <Filter Include="SourceCode\Part">
       <UniqueIdentifier>{c6964f06-9b8c-446a-8f44-3299598a3b7f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceCode\JSON">
-      <UniqueIdentifier>{3eab40b7-60e6-487a-879b-9b1e3022aeb9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SourceCode\Font">
       <UniqueIdentifier>{7880147d-1fd2-415a-9cd5-5d89b1d5bf9b}</UniqueIdentifier>
     </Filter>
@@ -784,6 +775,30 @@
     </Filter>
     <Filter Include="SourceCode\State\PlayerState">
       <UniqueIdentifier>{164ed880-9408-4481-810d-1bb869894ec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OriginalLibrary">
+      <UniqueIdentifier>{15dbda99-13cf-4696-8a80-50157f28d686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OriginalLibrary\JSON">
+      <UniqueIdentifier>{41a704cf-cc98-4f96-87d5-1b34886ee47b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OriginalLibrary\MixamoHelper">
+      <UniqueIdentifier>{a55a49f0-7f28-4bb5-b0ac-706872ec854e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OriginalLibrary\Matrix">
+      <UniqueIdentifier>{f98fea73-7d0e-41c9-a5fe-e5368f33f6ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OriginalLibrary\Vector">
+      <UniqueIdentifier>{fa325b54-89ae-46bc-9c50-d470422b3119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OriginalLibrary\Data">
+      <UniqueIdentifier>{443a41d9-df46-4f64-982f-34c05706d8e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OriginalLibrary\Data\JSON">
+      <UniqueIdentifier>{b7d50ba4-5cbf-4911-b2b6-5905bc4638e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OriginalLibrary\Axis">
+      <UniqueIdentifier>{844967a4-6b1a-4f57-81a9-e669d0da26f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -808,9 +823,6 @@
     <None Include="Data\JSON\boss.json">
       <Filter>JSON</Filter>
     </None>
-    <None Include="Data\JSON\mixamo_bone_hierarchy.json">
-      <Filter>JSON</Filter>
-    </None>
     <None Include="Data\JSON\control_virtual_cameras_controller.json">
       <Filter>JSON</Filter>
     </None>
@@ -819,6 +831,9 @@
     </None>
     <None Include="Data\JSON\stage.json">
       <Filter>JSON</Filter>
+    </None>
+    <None Include="OriginalLibrary\Data\JSON\mixamo_frame_hierarchy.json">
+      <Filter>OriginalLibrary\Data\JSON</Filter>
     </None>
   </ItemGroup>
 </Project>

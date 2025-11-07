@@ -65,18 +65,21 @@ public:
 	void SetColliderModelHandle(const int model_handle) { m_model_handle = model_handle; }
 	void SetVelocity(const VECTOR& velocity) { m_velocity = velocity; }
 
-	[[nodiscard]] int		GetColliderModelHandle()	const { return m_model_handle; }
-	[[nodiscard]] float		GetKnockBackSpeed()			const { return m_knockback_speed; }
-	[[nodiscard]] VECTOR	GetVelocity()				const { return m_velocity; }
-	[[nodiscard]] VECTOR	GetMoveVelocity()			const { return m_move_velocity; }
-	[[nodiscard]] VECTOR	GetFallVelocity()			const { return m_fall_velocity; }
-	[[nodiscard]] MassKind	GetMassKind()				const { return mass_kind; }
+	[[nodiscard]] int					GetColliderModelHandle()	const { return m_model_handle; }
+	[[nodiscard]] std::optional<VECTOR> GetProjectPos()				const { return m_project_pos; }
+	[[nodiscard]] float					GetKnockBackSpeed()			const { return m_knockback_speed; }
+	[[nodiscard]] VECTOR				GetVelocity()				const { return m_velocity; }
+	[[nodiscard]] VECTOR				GetMoveVelocity()			const { return m_move_velocity; }
+	[[nodiscard]] VECTOR				GetFallVelocity()			const { return m_fall_velocity; }
+	[[nodiscard]] MassKind				GetMassKind()				const { return mass_kind; }
+	[[nodiscard]] bool					IsLanding()					const { return m_is_landing; }
 	[[nodiscard]] std::shared_ptr<Collider> GetCollider(const ColliderKind kind) const;
 	[[nodiscard]] std::unordered_map<ColliderKind, std::shared_ptr<Collider>> GetColliderAll() const { return m_colliders; }
 
 protected:
 	MassKind mass_kind;
 
+	std::optional<VECTOR> m_project_pos;
 	VECTOR	 m_velocity;
 	VECTOR   m_move_velocity;
 	VECTOR	 m_fall_velocity;

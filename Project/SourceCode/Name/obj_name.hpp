@@ -5,6 +5,7 @@ static struct ObjName
 {
 	#pragma region ÉJÉÅÉâ
 	const std::string MAIN_CAMERA		= "main_camera";
+	const std::string FREEDOM_CAMERA	= "freedom_camera";
 	const std::string ROT_STAND_CAMERA	= "rot_stand_camera";
 	const std::string ROT_CROUCH_CAMERA	= "rot_crouch_camera";
 	#pragma endregion

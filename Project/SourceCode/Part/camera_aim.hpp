@@ -1,9 +1,9 @@
 #pragma once
 #include <memory>
 #include <algorithm>
+#include <Vector/vector_2d.hpp>
 
 #include "transform.hpp"
-#include "../Calculation/vector_2d.hpp"
 #include "../GameTime/game_time_manager.hpp"
 
 class CameraAim final

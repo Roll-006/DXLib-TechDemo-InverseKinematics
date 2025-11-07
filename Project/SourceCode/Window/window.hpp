@@ -6,7 +6,7 @@
 
 #include "../GameTime/fps.hpp"
 #include "../Input/input_checker.hpp"
-#include "../Calculation/vector_2d.hpp"
+#include <Vector/vector_2d.hpp>
 
 class Window final : public SingleInstanceBase<Window>
 {

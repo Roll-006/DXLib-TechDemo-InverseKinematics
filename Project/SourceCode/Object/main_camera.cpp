@@ -9,11 +9,11 @@ MainCamera::MainCamera() :
 {
 	mass_kind = MassKind::kHeavy;
 
-	AddCollider(std::make_shared<Collider>(ColliderKind::kRayCast, std::make_shared<Segment>(), this));
+	AddCollider(std::make_shared<Collider>(ColliderKind::kRay, std::make_shared<Segment>(), this));
 
 	// カメラが無視するコライダー
 	const auto collision_manager = CollisionManager::GetInstance();
-	const ColliderData ray_cast_data{ ObjTag.CAMERA, ColliderKind::kRayCast };
+	const ColliderData ray_cast_data{ ObjTag.CAMERA, ColliderKind::kRay };
 	collision_manager->AddIgnoreCollider(GetObjHandle(), ColliderKind::kCollider);
 	collision_manager->AddIgnoreColliderPair(ray_cast_data, { ObjTag.PLAYER,	ColliderKind::kNone });
 }
@@ -58,7 +58,7 @@ void MainCamera::OnCollide(const ColliderPairOneToOneData& hit_collider_pair)
 
 	switch (hit_collider_pair.owner_collider->GetColliderKind())
 	{
-	case ColliderKind::kRayCast:
+	case ColliderKind::kRay:
 		if (hit_collider_pair.intersection)
 		{
 			m_transform->SetPos(CoordinateKind::kWorld, *hit_collider_pair.intersection);
@@ -120,7 +120,7 @@ void MainCamera::SetAim()
 void MainCamera::CalcRayCastPos()
 {
 	// 光線の座標を計算
-	auto ray = std::static_pointer_cast<Segment>(GetCollider(ColliderKind::kRayCast)->GetShape());
+	auto ray = std::static_pointer_cast<Segment>(GetCollider(ColliderKind::kRay)->GetShape());
 	ray->SetBeginPos(m_aim_pos, true);
 	ray->SetEndPos	(m_transform->GetPos(CoordinateKind::kWorld), true);
 }

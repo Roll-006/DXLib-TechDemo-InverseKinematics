@@ -30,11 +30,12 @@ void SceneManager::Update()
 void SceneManager::LateUpdate()
 {
 	PhysicsManager	::GetInstance()->LateUpdate();
+	CollisionManager::GetInstance()->LateUpdate();
 
 	m_share_scene	->LateUpdate();
 	m_current_scene	->LateUpdate();
 
-	CollisionManager::GetInstance()->LateUpdate();
+	PhysicsManager	::GetInstance()->ProjectionPos();
 	InputChecker	::GetInstance()->LateUpdate();
 }
 
@@ -46,7 +47,7 @@ void SceneManager::DrawToShadowMap() const
 void SceneManager::Draw() const
 {
 	m_drawer->Draw(m_current_scene);
-	//CollisionManager::GetInstance()->Draw();
+	CollisionManager::GetInstance()->Draw();
 	Debugger::GetInstance()->Draw();
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "../Base/singleton_base.hpp"
-#include "../Command/command_handler.hpp"
+#include "../Input/input_checker.hpp"
 
 class Debugger final : public SingletonBase<Debugger>
 {

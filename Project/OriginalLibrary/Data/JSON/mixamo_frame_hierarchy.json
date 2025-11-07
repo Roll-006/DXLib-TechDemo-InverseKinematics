@@ -6,7 +6,9 @@
           "mixamorig:Spine2": {
             "mixamorig:Neck": {
               "mixamorig:Head": {
-                "mixamorig:HeadTop_End": {}
+                "mixamorig:HeadTop_End": {},
+                "mixamorig:LeftEye": {},
+                "mixamorig:RightEye": {}
               }
             },
             "mixamorig:LeftShoulder": {

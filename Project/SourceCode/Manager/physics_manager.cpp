@@ -46,6 +46,27 @@ void PhysicsManager::LateUpdate()
 	}
 }
 
+void PhysicsManager::ProjectionPos()
+{
+	for (const auto& obj : m_physical_objects)
+	{
+		if (!obj->IsActive()) { return; }
+		if (obj->IsLanding()) { return; }
+
+		const auto project_pos = obj->GetProjectPos();
+		if (!project_pos) { return; }
+
+		const auto collider = obj->GetCollider(ColliderKind::kCollider);
+		if (!collider) { return; }
+
+		const auto capsule = std::dynamic_pointer_cast<Capsule>(collider->GetShape());
+		if (!capsule) { return; }
+
+		const auto result_pos = *project_pos + axis::GetWorldYAxis() * capsule->GetRadius();
+		obj->GetTransform()->SetPos(CoordinateKind::kWorld, result_pos);
+	}
+}
+
 
 #pragma region 登録・解除
 void PhysicsManager::RemovePhysicalObj				(const int obj_handle)
@@ -116,38 +137,6 @@ bool PhysicsManager::CanPushBack(const int obj_handle1, const int obj_handle2)
 	if (std::find(m_ignore_push_back_pair_obj_handle.begin(), m_ignore_push_back_pair_obj_handle.end(), target2) != m_ignore_push_back_pair_obj_handle.end()) { return false; }
 
 	return true;
-}
-
-void PhysicsManager::ProjectionPos(const std::shared_ptr<PhysicalObjBase> physical_obj)
-{
-	// FIXME : 張り付け押し戻し作成中
-	//const auto collider_shape = physical_obj->GetCollider(ColliderKind::kCollider)->GetShape();
-
-	//if (!physical_obj->IsActive())								{ return; }
-	//if (!collider_shape)										{ return; }
-	//if (collider_shape->GetShapeKind() != ShapeKind::kCapsule)	{ return; }
-	//
-	//for (const auto& target_obj : m_physical_objects)
-	//{
-	//	// 自身との当たり判定は避ける
-	//	if (physical_obj == target_obj) { continue; }
-	//
-	//	// 非アクティブであれば適用しない
-	//	if (!target_obj	 ->IsActive()) { continue; }
-	//
-	//	// 衝突が許可されていない場合は以降の処理をスキップ
-	//	if (!IsApplyPhysicalBehavior(target_obj)) { continue; }
-	//
-	//	const auto target_collider	= target_obj->GetCollider(ColliderKind::kCollider);
-	//	const auto target_shape		= target_collider->GetShape();
-	//	MV1_COLL_RESULT_POLY_DIM hit_result;
-	//
-	//	if (!target_shape)
-	//	{
-	//		collision::IsCollidedCapsuleAndModel(*std::dynamic_pointer_cast<Capsule>(collider_shape), target_collider->GetModelHandle(), hit_result);
-	//	}
-	//
-	//}
 }
 
 void PhysicsManager::ExecutePushBackPairs()

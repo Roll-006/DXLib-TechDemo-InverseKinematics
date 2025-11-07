@@ -16,8 +16,6 @@ public:
 	virtual void Deactivate() abstract;
 
 	[[nodiscard]] virtual VirtualCameraControllerKind GetVirtualCameraControllerKind() const abstract;
-	[[nodiscard]] virtual std::shared_ptr<VirtualCamera> GetHaveVirtualCamera(const std::string& name) const abstract;
-	[[nodiscard]] virtual std::vector<std::shared_ptr<VirtualCamera>> GetHaveAllVirtualCamera()  const abstract;
 	[[nodiscard]] virtual int GetControllerHandle() const abstract;
 	[[nodiscard]] virtual bool IsActive() const abstract;
 };

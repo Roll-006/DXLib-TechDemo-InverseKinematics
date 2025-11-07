@@ -107,7 +107,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;OriginalLibrary</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -115,7 +115,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;OriginalLibrary</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -127,7 +127,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;OriginalLibrary</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -137,7 +137,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>Library;Library/Dxlib_h;Library/EffekseerForDXLib;Library/DxlibHelper_h;OriginalLibrary</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -161,7 +161,6 @@
     <ClCompile Include="SourceCode\GameTime\game_time_manager.cpp" />
     <ClCompile Include="SourceCode\Handle\handle_keeper.cpp" />
     <ClCompile Include="SourceCode\Input\input_checker.cpp" />
-    <ClCompile Include="SourceCode\JSON\json_loader.cpp" />
     <ClCompile Include="SourceCode\Light\spot_light.cpp" />
     <ClCompile Include="SourceCode\Light\point_light.cpp" />
     <ClCompile Include="SourceCode\Light\directional_light.cpp" />
@@ -220,6 +219,13 @@
     <ClCompile Include="SourceCode\Window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="OriginalLibrary\Axis\axis.hpp" />
+    <ClInclude Include="OriginalLibrary\JSON\json_loader.hpp" />
+    <ClInclude Include="OriginalLibrary\Matrix\matrix.hpp" />
+    <ClInclude Include="OriginalLibrary\MixamoHelper\mixamo_helper.hpp" />
+    <ClInclude Include="OriginalLibrary\Vector\vector_2d.hpp" />
+    <ClInclude Include="OriginalLibrary\Vector\vector_3d.hpp" />
+    <ClInclude Include="OriginalLibrary\Vector\vector_concepts.hpp" />
     <ClInclude Include="SourceCode\Algorithm\algorithm.hpp" />
     <ClInclude Include="SourceCode\Algorithm\a_star.hpp" />
     <ClInclude Include="SourceCode\Animator\player_animator.hpp" />
@@ -231,14 +237,10 @@
     <ClInclude Include="SourceCode\Base\physical_obj_base.hpp" />
     <ClInclude Include="SourceCode\Base\shape_base.hpp" />
     <ClInclude Include="SourceCode\Base\singleton_base.hpp" />
-    <ClInclude Include="SourceCode\Calculation\axes.hpp" />
     <ClInclude Include="SourceCode\Calculation\collision_calculator.hpp" />
     <ClInclude Include="SourceCode\Calculation\common_operator.hpp" />
     <ClInclude Include="SourceCode\Calculation\math.hpp" />
-    <ClInclude Include="SourceCode\Calculation\matrix.hpp" />
     <ClInclude Include="SourceCode\Calculation\quaternion.hpp" />
-    <ClInclude Include="SourceCode\Calculation\vector_2d.hpp" />
-    <ClInclude Include="SourceCode\Calculation\vector_3d.hpp" />
     <ClInclude Include="SourceCode\Command\command_handler.hpp" />
     <ClInclude Include="SourceCode\Concept\common_concepts.hpp" />
     <ClInclude Include="SourceCode\Concept\input_concepts.hpp" />
@@ -256,8 +258,6 @@
     <ClInclude Include="SourceCode\Data\collider_pair_data.hpp" />
     <ClInclude Include="SourceCode\Data\input_data.hpp" />
     <ClInclude Include="SourceCode\Debugger\debugger.hpp" />
-    <ClInclude Include="SourceCode\Debugger\mixamo_helper.cpp" />
-    <ClInclude Include="SourceCode\Debugger\mixamo_helper.hpp" />
     <ClInclude Include="SourceCode\Drawer\drawer.hpp" />
     <ClInclude Include="SourceCode\Event\event.hpp" />
     <ClInclude Include="SourceCode\Event\event_system.hpp" />
@@ -270,7 +270,6 @@
     <ClInclude Include="SourceCode\IncludeList\event.hpp" />
     <ClInclude Include="SourceCode\IncludeList\input.hpp" />
     <ClInclude Include="SourceCode\IncludeList\shape.hpp" />
-    <ClInclude Include="SourceCode\IncludeList\vector.hpp" />
     <ClInclude Include="SourceCode\Input\input_checker.hpp" />
     <ClInclude Include="SourceCode\Interface\i_light.hpp" />
     <ClInclude Include="SourceCode\Interface\i_poolable.hpp" />
@@ -278,7 +277,6 @@
     <ClInclude Include="SourceCode\Interface\i_state.hpp" />
     <ClInclude Include="SourceCode\Interface\i_state_controller.hpp" />
     <ClInclude Include="SourceCode\Interface\i_virtual_camera_controller.hpp" />
-    <ClInclude Include="SourceCode\JSON\json_loader.hpp" />
     <ClInclude Include="SourceCode\Kind\blend_activation_policy_kind.hpp" />
     <ClInclude Include="SourceCode\Kind\box_kind.hpp" />
     <ClInclude Include="SourceCode\Kind\collider_kind.hpp" />
@@ -364,7 +362,6 @@
     <ClInclude Include="SourceCode\Window\window.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\JSON\mixamo_bone_hierarchy.json" />
     <None Include="Data\JSON\boss.json" />
     <None Include="Data\JSON\control_virtual_cameras_controller.json" />
     <None Include="Data\JSON\player.json" />
@@ -375,6 +372,7 @@
     <None Include="Data\JSON\font_data.json" />
     <None Include="Data\JSON\key_number.json" />
     <None Include="Data\JSON\init_enemies.json" />
+    <None Include="OriginalLibrary\Data\JSON\mixamo_frame_hierarchy.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

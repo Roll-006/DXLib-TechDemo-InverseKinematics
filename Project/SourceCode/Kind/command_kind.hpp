@@ -33,10 +33,6 @@ enum class CommandKind
 	kMoveLeftCamera,					// カメラ左移動
 	kMoveRightCamera,					// カメラ右移動
 	kInitAim,							// 視点リセット
-
-	kChangeDebugMode,
-	kDebugTrigger1,
-	kDebugTrigger2,
 	#pragma endregion
 
 

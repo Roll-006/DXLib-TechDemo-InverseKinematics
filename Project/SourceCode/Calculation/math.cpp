@@ -44,7 +44,7 @@ Quaternion math::ConvertRotMatrixToQuaternion(const MATRIX& rot_matrix)
     {
         if (e.at(i) > e.at(max_index))
         {
-            max_index = i;
+            max_index = static_cast<unsigned int>(i);
         }
     }
 
@@ -54,27 +54,27 @@ Quaternion math::ConvertRotMatrixToQuaternion(const MATRIX& rot_matrix)
     const float mult    = 0.25f / v;
     q.at(max_index)     = v;
 
-    switch (static_cast<quat::AxesKind>(max_index))
+    switch (static_cast<quat::AxisKind>(max_index))
     {
-    case quat::AxesKind::kX:
+    case quat::AxisKind::kX:
         q.at(1) = (m.m[0][1] + m.m[1][0]) * mult;
         q.at(2) = (m.m[2][0] + m.m[0][2]) * mult;
         q.at(3) = (m.m[1][2] - m.m[2][1]) * mult;
         break;
 
-    case quat::AxesKind::kY:
+    case quat::AxisKind::kY:
         q.at(0) = (m.m[0][1] + m.m[1][0]) * mult;
         q.at(2) = (m.m[1][2] + m.m[2][1]) * mult;
         q.at(3) = (m.m[2][0] - m.m[0][2]) * mult;
         break;
 
-    case quat::AxesKind::kZ:
+    case quat::AxisKind::kZ:
         q.at(0) = (m.m[2][0] + m.m[0][2]) * mult;
         q.at(1) = (m.m[1][2] + m.m[2][1]) * mult;
         q.at(3) = (m.m[0][1] - m.m[1][0]) * mult;
         break;
 
-    case quat::AxesKind::kW:
+    case quat::AxisKind::kW:
         q.at(0) = (m.m[1][2] - m.m[2][1]) * mult;
         q.at(1) = (m.m[2][0] - m.m[0][2]) * mult;
         q.at(2) = (m.m[0][1] - m.m[1][0]) * mult;
@@ -84,26 +84,26 @@ Quaternion math::ConvertRotMatrixToQuaternion(const MATRIX& rot_matrix)
     return Quaternion(q.at(0), q.at(1), q.at(2), q.at(3));
 }
 
-MATRIX math::ConvertAxesToRotMatrix(const Axes& axes)
+MATRIX math::ConvertAxisToRotMatrix(const Axis& axis)
 {
     MATRIX mat = MGetIdent();
 
     // right
-    mat.m[0][0] = axes.x_axis.x;
-    mat.m[0][1] = axes.x_axis.y;
-    mat.m[0][2] = axes.x_axis.z;
+    mat.m[0][0] = axis.x_axis.x;
+    mat.m[0][1] = axis.x_axis.y;
+    mat.m[0][2] = axis.x_axis.z;
     mat.m[0][3] = 0.0f;
 
     // up
-    mat.m[1][0] = axes.y_axis.x;
-    mat.m[1][1] = axes.y_axis.y;
-    mat.m[1][2] = axes.y_axis.z;
+    mat.m[1][0] = axis.y_axis.x;
+    mat.m[1][1] = axis.y_axis.y;
+    mat.m[1][2] = axis.y_axis.z;
     mat.m[1][3] = 0.0f;
 
     // forward
-    mat.m[2][0] = axes.z_axis.x;
-    mat.m[2][1] = axes.z_axis.y;
-    mat.m[2][2] = axes.z_axis.z;
+    mat.m[2][0] = axis.z_axis.x;
+    mat.m[2][1] = axis.z_axis.y;
+    mat.m[2][2] = axis.z_axis.z;
     mat.m[2][3] = 0.0f;
 
     mat.m[3][0] = 0.0f;
@@ -114,11 +114,11 @@ MATRIX math::ConvertAxesToRotMatrix(const Axes& axes)
     return mat;
 }
 
-VECTOR math::ConvertAxesToEulerAngles(const Axes& axes)
+VECTOR math::ConvertAxisToEulerAngles(const Axis& axis)
 {
-    const float angle_x = GetAngleBetweenTwoVector(axis::GetWorldXAxis(), axes.x_axis);
-    const float angle_y = GetAngleBetweenTwoVector(axis::GetWorldYAxis(), axes.y_axis);
-    const float angle_z = GetAngleBetweenTwoVector(axis::GetWorldZAxis(), axes.z_axis);
+    const float angle_x = GetAngleBetweenTwoVector(axis::GetWorldXAxis(), axis.x_axis);
+    const float angle_y = GetAngleBetweenTwoVector(axis::GetWorldYAxis(), axis.y_axis);
+    const float angle_z = GetAngleBetweenTwoVector(axis::GetWorldZAxis(), axis.z_axis);
 
     return VECTOR(angle_x, angle_y, angle_z);
 }
@@ -153,30 +153,16 @@ VECTOR math::ConvertZXYRotMatrixToEulerAngles(const MATRIX& rot_matrix)
     return angle;
 }
 
-Axes math::ConvertRotMatrixToAxes(const MATRIX& rot_matrix)
+Axis math::ConvertRotMatrixToAxis(const MATRIX& rot_matrix)
 {
-    const MATRIX m = MGetRotElem(rot_matrix);
+    // 回転行列を取得
+    MATRIX rot = MGetRotElem(rot_matrix);
 
-    const VECTOR scale
-    {
-        VSize(VGet(m.m[0][0], m.m[0][1], m.m[0][2])),
-        VSize(VGet(m.m[0][0], m.m[0][1], m.m[0][2])),
-        VSize(VGet(m.m[2][0], m.m[2][1], m.m[2][2]))
-    };
+    VECTOR x_axis = VGet(rot.m[0][0], rot.m[0][1], rot.m[0][2]);
+    VECTOR y_axis = VGet(rot.m[1][0], rot.m[1][1], rot.m[1][2]);
+    VECTOR z_axis = VGet(rot.m[2][0], rot.m[2][1], rot.m[2][2]);
 
-    // スケールを打ち消す逆数
-    const VECTOR reciprocal
-    {
-        1.0f / scale.x,
-        1.0f / scale.y,
-        1.0f / scale.z
-    };
-
-    const VECTOR x_axis = VTransform(axis::GetWorldXAxis(), m) * reciprocal.x;
-    const VECTOR y_axis = VTransform(axis::GetWorldYAxis(), m) * reciprocal.y;
-    const VECTOR z_axis = VTransform(axis::GetWorldZAxis(), m) * reciprocal.z;
-
-    return Axes(x_axis, y_axis, z_axis);
+    return { v3d::GetNormalizedV(x_axis), v3d::GetNormalizedV(y_axis), v3d::GetNormalizedV(z_axis) };
 }
 
 MATRIX math::ConvertEulerAnglesToXYZRotMatrix(const VECTOR& angle)
@@ -199,7 +185,7 @@ MATRIX math::ConvertForwardToRotMatrix(const VECTOR& forward)
     const auto right        = -math::GetNormalVector(forward_n, axis::GetWorldYAxis());
     const auto up           = math::GetNormalVector(forward_n, right);
 
-    return math::ConvertAxesToRotMatrix(Axes(right, up, forward_n));
+    return math::ConvertAxisToRotMatrix(Axis(right, up, forward_n));
 }
 #pragma endregion
 
@@ -473,16 +459,16 @@ VECTOR math::GetDampedValue(const VECTOR& current_value, const VECTOR& target_va
     return damped_value;
 }
 
-VECTOR math::GetDampedValueOnAxes(const VECTOR& current_value, const VECTOR& target_value, const VECTOR& damping, const Axes& parent_axes, const float delta_time)
+VECTOR math::GetDampedValueOnAxis(const VECTOR& current_value, const VECTOR& target_value, const VECTOR& damping, const Axis& parent_axis, const float delta_time)
 {
     VECTOR damped_value         = current_value;
     const auto distance         = target_value - current_value;
 
     // カメラの軸に分解（内積）
     // distanceが各軸にどれだけ含まれているかをを取得
-    const auto forward_dot      = VDot(distance, parent_axes.z_axis);
-    const auto right_dot        = VDot(distance, parent_axes.x_axis);
-    const auto up_dot           = VDot(distance, parent_axes.y_axis);
+    const auto forward_dot      = VDot(distance, parent_axis.z_axis);
+    const auto right_dot        = VDot(distance, parent_axis.x_axis);
+    const auto up_dot           = VDot(distance, parent_axis.y_axis);
 
     // 各軸の移動量に対して減衰を適用
     const auto damped_forward   = math::GetDampedValue(0.0f, forward_dot, damping.z, delta_time);
@@ -491,9 +477,9 @@ VECTOR math::GetDampedValueOnAxes(const VECTOR& current_value, const VECTOR& tar
 
     // 減衰移動ベクトルを再合成
     const VECTOR damped_move =
-        parent_axes.z_axis * damped_forward +
-        parent_axes.x_axis * damped_right +
-        parent_axes.y_axis * damped_up;
+        parent_axis.z_axis * damped_forward +
+        parent_axis.x_axis * damped_right +
+        parent_axis.y_axis * damped_up;
 
     damped_value += damped_move;
 
@@ -678,14 +664,14 @@ VECTOR math::GetYawRotVector(const VECTOR& v)
     return VGet(0.0f, GetYaw(v), 0.0f);
 }
 
-Axes math::GetAxes(const VECTOR& dir, const Axes& parent_axes)
+Axis math::GetAxis(const VECTOR& dir, const Axis& parent_axis)
 {
     // directionを基準として各軸を取得
     const VECTOR local_dir_z = v3d::GetNormalizedV(dir);
-    const VECTOR local_dir_x = math::GetNormalVector(parent_axes.y_axis, local_dir_z);
+    const VECTOR local_dir_x = math::GetNormalVector(parent_axis.y_axis, local_dir_z);
     const VECTOR local_dir_y = math::GetNormalVector(local_dir_z, local_dir_x);
 
-    return Axes(local_dir_x, local_dir_y, local_dir_z);
+    return Axis(local_dir_x, local_dir_y, local_dir_z);
 }
 #pragma endregion
 

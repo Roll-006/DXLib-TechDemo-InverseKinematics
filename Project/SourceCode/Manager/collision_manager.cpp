@@ -27,7 +27,9 @@ void CollisionManager::LateUpdate()
 	for (const auto& pair : collider_pairs)
 	{
 		// レイキャストトリガーの場合は最初に衝突したコライダーのみ衝突したものとする
-		if (pair.owner_collider->GetColliderKind() == ColliderKind::kRayCast && pair.owner_collider->IsClosestOnlyHit())
+		const auto owner_collider_kind	= pair.owner_collider->GetColliderKind();
+		const auto is_ray				= owner_collider_kind == ColliderKind::kRay || owner_collider_kind == ColliderKind::kProjectRay;
+		if (is_ray && pair.owner_collider->IsClosestOnlyHit())
 		{
 			// コライダーとの距離を取得
 			std::unordered_map<int, TargetColliderData> target;

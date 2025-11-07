@@ -44,10 +44,10 @@ void Graphicer::Draw(const bool is_draw_graphic_frame) const
 		DrawRotaGraphFast3(
 			m_center_pos.x,
 			m_center_pos.y,
-			static_cast<int>(m_origin_width * 0.5f),
+			static_cast<int>(m_origin_width  * 0.5f),
 			static_cast<int>(m_origin_height * 0.5f),
-			static_cast<double>(m_scale.x),
-			static_cast<double>(m_scale.y),
+			m_scale.x,
+			m_scale.y,
 			m_angle,
 			m_graphic_handle,
 			TRUE,

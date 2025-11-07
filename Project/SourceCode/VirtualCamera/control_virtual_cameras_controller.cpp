@@ -1,32 +1,42 @@
+#include <JSON/json_loader.hpp>
+
 #include "control_virtual_cameras_controller.hpp"
 
 #include "../VirtualCamera/cinemachine_brain.hpp"
 #include "../Object/player.hpp"
-#include "../JSON/json_loader.hpp"
+#include "../Debugger/debugger.hpp"
 
 ControlVirtualCamerasController::ControlVirtualCamerasController(Player& player) :
 	virtual_camera_controller_kind(VirtualCameraControllerKind::kControl),
 	m_controller_handle				(HandleCreator::GetInstance()->CreateHandle()),
 	m_is_active						(true),
+	m_is_using_freedom_camera		(false),
 	m_player						(player),
-	m_rot_stand_control_camera		(std::make_shared<VirtualCamera>(ObjName.ROT_STAND_CAMERA,  BlendActivationPolicyKind::kKeepOriginCamera)),
-	m_rot_crouch_control_camera		(std::make_shared<VirtualCamera>(ObjName.ROT_CROUCH_CAMERA, BlendActivationPolicyKind::kKeepOriginCamera)),
-	m_aim_transform					(std::make_shared<Transform>()),
+	m_rot_stand_control_camera		(nullptr),
+	m_rot_crouch_control_camera		(nullptr),
+	m_freedom_control_camera		(nullptr),
+	m_rot_aim_transform				(std::make_shared<Transform>()),
+	m_freedom_aim_transform			(std::make_shared<Transform>()),
 	m_current_aim_pos				(v3d::GetZeroV()),
 	m_move_dir						(v3d::GetZeroV()),
-	m_velocity						(v3d::GetZeroV())
+	m_velocity						(v3d::GetZeroV()),
+	m_rot_camera_input_angle		(v3d::GetZeroV()),
+	m_freedom_camera_input_angle	(v3d::GetZeroV())
 {
-	JSONLoader json_loader;
 	nlohmann::json data;
-	if (json_loader.Load("Data/JSON/control_virtual_cameras_controller.json", data))
+	if (json_loader::Load("Data/JSON/control_virtual_cameras_controller.json", data))
 	{
 		const auto rot_stand_control_camera		= data.at("control_virtual_cameras_controller").at("rot_stand_control_camera").get<VirtualCamera>();
 		m_rot_stand_control_camera				= std::make_shared<VirtualCamera>(rot_stand_control_camera);
-		m_rot_stand_control_camera->AttachTarget(m_aim_transform);
+		m_rot_stand_control_camera				->AttachTarget(m_rot_aim_transform);
 
 		const auto rot_crouch_control_camera	= data.at("control_virtual_cameras_controller").at("rot_crouch_control_camera").get<VirtualCamera>();
 		m_rot_crouch_control_camera				= std::make_shared<VirtualCamera>(rot_crouch_control_camera);
-		m_rot_crouch_control_camera->AttachTarget(m_aim_transform);
+		m_rot_crouch_control_camera				->AttachTarget(m_rot_aim_transform);
+
+		const auto freedom_control_camera		= data.at("control_virtual_cameras_controller").at("freedom_control_camera").get<VirtualCamera>();
+		m_freedom_control_camera				= std::make_shared<VirtualCamera>(freedom_control_camera);
+		m_freedom_control_camera				->AttachTarget(m_freedom_aim_transform);
 
 		virtual_camera_controller_kind	= data.at("control_virtual_cameras_controller").at("virtual_camera_controller_kind");
 		camera_aim_offset_basic_speed	= data.at("control_virtual_cameras_controller").at("camera_aim_offset_basic_speed");
@@ -39,15 +49,17 @@ ControlVirtualCamerasController::ControlVirtualCamerasController(Player& player)
 
 	const auto cinemachine_brain = CinemachineBrain::GetInstance();
 	cinemachine_brain->SetBlendTime(0.2f);
-	cinemachine_brain->AddVirtualCamera(m_rot_stand_control_camera,  true);
-	cinemachine_brain->AddVirtualCamera(m_rot_crouch_control_camera, false);
+	cinemachine_brain->AddVirtualCamera(m_rot_stand_control_camera,		true);
+	cinemachine_brain->AddVirtualCamera(m_rot_crouch_control_camera,	false);
+	cinemachine_brain->AddVirtualCamera(m_freedom_control_camera,		false);
 }
 
 ControlVirtualCamerasController::~ControlVirtualCamerasController()
 {
 	const auto cinemachine_brain = CinemachineBrain::GetInstance();
-	cinemachine_brain->RemoveVirtualCamera(m_rot_stand_control_camera->GetCameraHandle());
-	cinemachine_brain->RemoveVirtualCamera(m_rot_crouch_control_camera->GetCameraHandle());
+	cinemachine_brain->RemoveVirtualCamera(m_rot_stand_control_camera	->GetCameraHandle());
+	cinemachine_brain->RemoveVirtualCamera(m_rot_crouch_control_camera	->GetCameraHandle());
+	cinemachine_brain->RemoveVirtualCamera(m_freedom_control_camera		->GetCameraHandle());
 }
 
 void ControlVirtualCamerasController::Init()
@@ -59,17 +71,23 @@ void ControlVirtualCamerasController::Update()
 {
 	if (!IsActive()) { return; }
 
-	Move();
+	JudgeUseFreedomCamera();
+
+	m_move_dir = v3d::GetZeroV();
+	m_velocity = v3d::GetZeroV();
+
+	MoveRotCamera();
+	MoveFreedomCamera();
 }
 
 void ControlVirtualCamerasController::LateUpdate()
 {
 	if (!IsActive()) { return; }
 
-	CalcAimPos();
+	CalcRotCameraAimPos();
 
-	MATRIX result_m = math::ConvertEulerAnglesToXYZRotMatrix(m_input_angle[TimeKind::kCurrent]);
-	m_aim_transform->SetRot(CoordinateKind::kWorld, MGetRotElem(result_m));
+	ApplyAngleRotCamera();
+	ApplyAngleFreedomCamera();
 }
 
 VirtualCameraControllerKind ControlVirtualCamerasController::GetVirtualCameraControllerKind() const
@@ -77,39 +95,20 @@ VirtualCameraControllerKind ControlVirtualCamerasController::GetVirtualCameraCon
 	return virtual_camera_controller_kind;
 }
 
-std::shared_ptr<VirtualCamera> ControlVirtualCamerasController::GetHaveVirtualCamera(const std::string& name) const
+
+#pragma region 回転カメラ
+void ControlVirtualCamerasController::MoveRotCamera()
 {
-	const auto cinemachine_brain = CinemachineBrain::GetInstance();
-	const auto camera = cinemachine_brain->GetVirtualCamera(name);
-	if (!camera) { return nullptr; }
+	if (m_is_using_freedom_camera[TimeKind::kCurrent]) { return; }
 
-	if (   camera == m_rot_stand_control_camera
-		|| camera == m_rot_crouch_control_camera)
-	{
-		return camera;
-	}
+	CalcRotCameraMoveDirFromPad();
+	CalcRotCameraMoveDirFromMouse();
+	CalcRotCameraMoveDirFromCommand();
 
-	return nullptr;
+	CalcRotCameraInputAngle();
 }
 
-std::vector<std::shared_ptr<VirtualCamera>> ControlVirtualCamerasController::GetHaveAllVirtualCamera() const
-{
-	return std::vector<std::shared_ptr<VirtualCamera>>{m_rot_stand_control_camera, m_rot_crouch_control_camera};
-}
-
-void ControlVirtualCamerasController::Move()
-{
-	m_move_dir = v3d::GetZeroV();
-	m_velocity = v3d::GetZeroV();
-
-	CalcMoveDirFromPad();
-	CalcMoveDirFromMouse();
-	CalcMoveDirFromCommand();
-
-	CalcInputAngle();
-}
-
-void ControlVirtualCamerasController::CalcMoveDirFromPad()
+void ControlVirtualCamerasController::CalcRotCameraMoveDirFromPad()
 {
 	if (m_move_dir != v3d::GetZeroV()) { return; }
 	if (InputChecker::GetInstance()->GetCurrentInputDevice() != DeviceKind::kPad) { return; }
@@ -131,9 +130,8 @@ void ControlVirtualCamerasController::CalcMoveDirFromPad()
 	m_move_dir = v3d::GetNormalizedV(m_velocity);
 }
 
-void ControlVirtualCamerasController::CalcMoveDirFromMouse()
+void ControlVirtualCamerasController::CalcRotCameraMoveDirFromMouse()
 {
-	//if (m_is_init_aiming) { return; }
 	if (m_move_dir != v3d::GetZeroV()) { return; }
 	if (InputChecker::GetInstance()->GetCurrentInputDevice() != DeviceKind::kKeyboard) { return; }
 
@@ -144,10 +142,8 @@ void ControlVirtualCamerasController::CalcMoveDirFromMouse()
 	m_move_dir = v3d::GetNormalizedV(m_velocity);
 }
 
-void ControlVirtualCamerasController::CalcMoveDirFromCommand()
+void ControlVirtualCamerasController::CalcRotCameraMoveDirFromCommand()
 {
-	//if (m_is_init_aiming) { return; }
-
 	const auto input	= InputChecker	::GetInstance();
 	const auto command	= CommandHandler::GetInstance();
 
@@ -168,11 +164,10 @@ void ControlVirtualCamerasController::CalcMoveDirFromCommand()
 	}
 }
 
-void ControlVirtualCamerasController::CalcAimPos()
+void ControlVirtualCamerasController::CalcRotCameraAimPos()
 {
 	const auto modeler = m_player.GetModeler();
 	modeler->ApplyMatrix();
-
 
 	// 追跡するボーンから行列を取得
 	const TCHAR*	bone_name			= BonePath.SPINE_2;
@@ -189,24 +184,140 @@ void ControlVirtualCamerasController::CalcAimPos()
 
 	m_current_aim_pos = math::GetApproachedVector(m_current_aim_pos, aim_pos, camera_aim_offset_basic_speed * VSize(aim_pos - m_current_aim_pos));
 
-	m_aim_transform->SetPos(CoordinateKind::kWorld, m_current_aim_pos);
+	m_rot_aim_transform->SetPos(CoordinateKind::kWorld, m_current_aim_pos);
 }
 
-void ControlVirtualCamerasController::CalcInputAngle()
+void ControlVirtualCamerasController::CalcRotCameraInputAngle()
 {
 	const auto time_manager = GameTimeManager::GetInstance();
 	m_velocity *= time_manager->GetDeltaTime(TimeScaleLayerKind::kCamera);
 
 	// 角度を取得
 	const auto command = CommandHandler::GetInstance();
-	if (command->IsExecute(CommandKind::kMoveUpCamera,		TimeKind::kCurrent)) { m_input_angle[TimeKind::kCurrent].x += m_velocity.x; }
-	if (command->IsExecute(CommandKind::kMoveDownCamera,	TimeKind::kCurrent)) { m_input_angle[TimeKind::kCurrent].x += m_velocity.x; }
-	if (command->IsExecute(CommandKind::kMoveLeftCamera,	TimeKind::kCurrent)) { m_input_angle[TimeKind::kCurrent].y += m_velocity.y; }
-	if (command->IsExecute(CommandKind::kMoveRightCamera,	TimeKind::kCurrent)) { m_input_angle[TimeKind::kCurrent].y += m_velocity.y; }
+	if (command->IsExecute(CommandKind::kMoveUpCamera,		TimeKind::kCurrent)) { m_rot_camera_input_angle.x += m_velocity.x; }
+	if (command->IsExecute(CommandKind::kMoveDownCamera,	TimeKind::kCurrent)) { m_rot_camera_input_angle.x += m_velocity.x; }
+	if (command->IsExecute(CommandKind::kMoveLeftCamera,	TimeKind::kCurrent)) { m_rot_camera_input_angle.y += m_velocity.y; }
+	if (command->IsExecute(CommandKind::kMoveRightCamera,	TimeKind::kCurrent)) { m_rot_camera_input_angle.y += m_velocity.y; }
 
-	m_input_angle[TimeKind::kCurrent].y = math::ConnectMinusValueToValue(m_input_angle[TimeKind::kCurrent].y, DX_PI_F);
+	m_rot_camera_input_angle.y = math::ConnectMinusValueToValue(m_rot_camera_input_angle.y, DX_PI_F);
 
 	// 角度制限
-	if (m_input_angle[TimeKind::kCurrent].x < min_vertical_input_angle * math::kDegToRad) { m_input_angle[TimeKind::kCurrent].x = min_vertical_input_angle * math::kDegToRad; }
-	if (m_input_angle[TimeKind::kCurrent].x > max_vertical_input_angle * math::kDegToRad) { m_input_angle[TimeKind::kCurrent].x = max_vertical_input_angle * math::kDegToRad; }
+	if (m_rot_camera_input_angle.x < min_vertical_input_angle * math::kDegToRad) { m_rot_camera_input_angle.x = min_vertical_input_angle * math::kDegToRad; }
+	if (m_rot_camera_input_angle.x > max_vertical_input_angle * math::kDegToRad) { m_rot_camera_input_angle.x = max_vertical_input_angle * math::kDegToRad; }
 }
+
+void ControlVirtualCamerasController::ApplyAngleRotCamera()
+{
+	MATRIX result_m = math::ConvertEulerAnglesToXYZRotMatrix(m_rot_camera_input_angle);
+	m_rot_aim_transform->SetRot(CoordinateKind::kWorld, MGetRotElem(result_m));
+}
+#pragma endregion
+
+
+#pragma region 自由移動カメラ
+void ControlVirtualCamerasController::MoveFreedomCamera()
+{
+	if (!m_is_using_freedom_camera[TimeKind::kCurrent]) { return; }
+
+	const auto input = InputChecker::GetInstance();
+	if (!input->IsInput(KEY_INPUT_LCONTROL))
+	{
+		// 現在入力されているvelocityを取得
+		const auto forward = GetMoveForward();
+		const auto right = GetMoveRight();
+		if (input->IsInput(KEY_INPUT_UP))
+		{
+			m_move_dir += input->IsInput(KEY_INPUT_LSHIFT) ? axis::GetWorldYAxis() : forward;
+		}
+		if (input->IsInput(KEY_INPUT_DOWN))
+		{
+			m_move_dir -= input->IsInput(KEY_INPUT_LSHIFT) ? axis::GetWorldYAxis() : forward;
+		}
+		if (input->IsInput(KEY_INPUT_LEFT))
+		{
+			m_move_dir -= right;
+		}
+		if (input->IsInput(KEY_INPUT_RIGHT))
+		{
+			m_move_dir += right;
+		}
+		m_velocity = v3d::GetNormalizedV(m_move_dir) * 2.0f;
+		m_freedom_aim_transform->Move(CoordinateKind::kWorld, m_velocity);
+	}
+	else
+	{
+		CalcFreedomCameraInputAngle();
+	}
+}
+
+void ControlVirtualCamerasController::CalcFreedomCameraInputAngle()
+{
+	const auto input = InputChecker::GetInstance();
+
+	// 角度を取得
+	const auto delta_time = m_freedom_control_camera->GetDeltaTime();
+	if (input->IsInput(KEY_INPUT_UP))	 { m_freedom_camera_input_angle.x += -2.0f * delta_time; }
+	if (input->IsInput(KEY_INPUT_DOWN))  { m_freedom_camera_input_angle.x +=  2.0f * delta_time; }
+	if (input->IsInput(KEY_INPUT_LEFT))  { m_freedom_camera_input_angle.y += -2.0f * delta_time; }
+	if (input->IsInput(KEY_INPUT_RIGHT)) { m_freedom_camera_input_angle.y +=  2.0f * delta_time; }
+
+	m_freedom_camera_input_angle.y = math::ConnectMinusValueToValue(m_freedom_camera_input_angle.y, DX_PI_F);
+
+	// 角度制限
+	if (m_freedom_camera_input_angle.x < min_vertical_input_angle * math::kDegToRad) { m_freedom_camera_input_angle.x = min_vertical_input_angle * math::kDegToRad; }
+	if (m_freedom_camera_input_angle.x > max_vertical_input_angle * math::kDegToRad) { m_freedom_camera_input_angle.x = max_vertical_input_angle * math::kDegToRad; }
+}
+
+void ControlVirtualCamerasController::ApplyAngleFreedomCamera()
+{
+	MATRIX result_m = math::ConvertEulerAnglesToXYZRotMatrix(m_freedom_camera_input_angle);
+	m_freedom_aim_transform->SetRot(CoordinateKind::kWorld, MGetRotElem(result_m));
+}
+
+void ControlVirtualCamerasController::JudgeUseFreedomCamera()
+{
+	const auto debugger = Debugger::GetInstance();
+
+	m_is_using_freedom_camera[TimeKind::kPrev]		= m_is_using_freedom_camera[TimeKind::kCurrent];
+	m_is_using_freedom_camera[TimeKind::kCurrent]	= debugger->IsUsingDebug() ? true : false;
+
+	if (m_is_using_freedom_camera[TimeKind::kCurrent])
+	{
+		m_freedom_control_camera->Activate();
+
+		// アクティブ化されて最初のフレームは回転カメラの情報を引き継ぐ
+		if (!m_is_using_freedom_camera[TimeKind::kPrev])
+		{
+			m_freedom_aim_transform->SetMatrix(CoordinateKind::kWorld, m_rot_aim_transform->GetMatrix(CoordinateKind::kWorld));
+			m_freedom_camera_input_angle = m_rot_camera_input_angle;
+		}
+	}
+	else
+	{
+		m_freedom_control_camera->Deactivate();
+
+		if (m_is_using_freedom_camera[TimeKind::kPrev])
+		{
+			m_rot_aim_transform->SetRot(CoordinateKind::kWorld, m_freedom_aim_transform->GetRotMatrix(CoordinateKind::kWorld));
+			m_rot_camera_input_angle = m_freedom_camera_input_angle;
+		}
+	}
+}
+
+VECTOR ControlVirtualCamerasController::GetMoveForward()
+{
+	// MEMO : cinemachine brainを介するよりDxLib既存の関数を使用したほうが取得が早い
+	auto forward = GetCameraFrontVector();
+	forward.y = 0.0f;
+
+	return v3d::GetNormalizedV(forward);
+}
+
+VECTOR ControlVirtualCamerasController::GetMoveRight()
+{
+	auto right = GetCameraRightVector();
+	right.y = 0.0f;
+
+	return v3d::GetNormalizedV(right);
+}
+#pragma endregion

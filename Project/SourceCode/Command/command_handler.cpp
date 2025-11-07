@@ -2,9 +2,8 @@
 
 CommandHandler::CommandHandler()
 {
-	m_trigger_count[TimeKind::kCurrent][CommandKind::kRun]				= 0;
-	m_trigger_count[TimeKind::kCurrent][CommandKind::kCrouch]			= 0;
-	m_trigger_count[TimeKind::kCurrent][CommandKind::kChangeDebugMode]	= 0;
+	m_trigger_count[TimeKind::kCurrent][CommandKind::kRun]		= 0;
+	m_trigger_count[TimeKind::kCurrent][CommandKind::kCrouch]	= 0;
 
 	// èâä˙ê›íË
 	InitKeyCommand();
@@ -96,10 +95,6 @@ void CommandHandler::InitKeyCommand()
 	AddInputCode(CommandKind::kSelectWeaponRotateLeft,		CommandSlotKind::kMain,		mouse::WheelKind ::kUp);
 	AddInputCode(CommandKind::kSelectWeaponRotateRight,		CommandSlotKind::kMain,		mouse::WheelKind ::kDown);
 	AddInputCode(CommandKind::kSideChangeWeapon,			CommandSlotKind::kMain,		mouse::ButtonKind::kMiddle);
-
-	AddInputCode(CommandKind::kChangeDebugMode,				CommandSlotKind::kStatic1,	KEY_INPUT_RETURN);
-	AddInputCode(CommandKind::kDebugTrigger1,				CommandSlotKind::kStatic1,	KEY_INPUT_LSHIFT);
-	AddInputCode(CommandKind::kDebugTrigger2,				CommandSlotKind::kStatic1,	KEY_INPUT_D);
 }
 
 void CommandHandler::InitPadCommand()
@@ -148,10 +143,6 @@ void CommandHandler::InitPadCommand()
 	AddInputCode(CommandKind::kSelectWeaponUp,				CommandSlotKind::kStatic1,	pad::ButtonKind	::kUp);
 	AddInputCode(CommandKind::kSelectWeaponRight,			CommandSlotKind::kStatic1,	pad::ButtonKind	::kRight);
 	AddInputCode(CommandKind::kSelectWeaponDown,			CommandSlotKind::kStatic1,	pad::ButtonKind	::kDown);
-
-	AddInputCode(CommandKind::kChangeDebugMode,				CommandSlotKind::kStatic1,	pad::ButtonKind	::kBack);
-	AddInputCode(CommandKind::kDebugTrigger1,				CommandSlotKind::kStatic1,	pad::TriggerKind::kLT);
-	AddInputCode(CommandKind::kDebugTrigger2,				CommandSlotKind::kStatic1,	pad::TriggerKind::kRT);
 }
 
 void CommandHandler::InitInputMode()
@@ -199,10 +190,6 @@ void CommandHandler::InitInputMode()
 	m_input_mode[CommandKind::kSelectWeaponUp]				= InputModeKind::kSingle;
 	m_input_mode[CommandKind::kSelectWeaponRight]			= InputModeKind::kSingle;
 	m_input_mode[CommandKind::kSelectWeaponDown]			= InputModeKind::kSingle;
-
-	m_input_mode[CommandKind::kChangeDebugMode]				= InputModeKind::kTrigger;
-	m_input_mode[CommandKind::kDebugTrigger1]				= InputModeKind::kHold;
-	m_input_mode[CommandKind::kDebugTrigger2]				= InputModeKind::kHold;
 }
 
 void CommandHandler::InitCurrentTriggerInputCount(const CommandKind kind)

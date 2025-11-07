@@ -11,6 +11,8 @@ public:
 	void Update();
 	void LateUpdate();
 
+	void ProjectionPos();
+
 
 	#pragma region 登録・解除
 	/// @brief 物理的挙動を行うオブジェクトを追加
@@ -77,8 +79,6 @@ private:
 	}
 
 	[[nodiscard]] bool CanPushBack(const int obj_handle1, const int obj_handle2);
-
-	void ProjectionPos(const std::shared_ptr<PhysicalObjBase> physical_obj);
 
 private:
 	static constexpr float kGravityAcceleration				= 180.0f;	// 重力加速度(デルタタイム適用前)

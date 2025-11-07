@@ -2,18 +2,18 @@
 #include <algorithm>
 #include <optional>
 #include <array>
+#include <Matrix/matrix.hpp>
+#include <Axis/axis.hpp>
+#include <Vector/vector_2d.hpp>
 
 #include "../Algorithm/algorithm.hpp"
 #include "../Random/random_generator.hpp"
 
 #include "../Concept/common_concepts.hpp"
 
-#include "axes.hpp"
-#include "matrix.hpp"
 #include "quaternion.hpp"
 
 #include "../Kind/time_kind.hpp"
-#include "../IncludeList/vector.hpp"
 #include "../GameTime/fps.hpp"
 
 class Point;
@@ -73,10 +73,10 @@ namespace math
 	[[nodiscard]] Quaternion ConvertRotMatrixToQuaternion(const MATRIX& rot_matrix);
 
 	/// @brief XYZ軸から回転行列(回転順は問わない)へ変換
-	[[nodiscard]] MATRIX ConvertAxesToRotMatrix(const Axes& axes);
+	[[nodiscard]] MATRIX ConvertAxisToRotMatrix(const Axis& axis);
 
 	/// @brief XYZ軸からオイラー角へ変換
-	[[nodiscard]] VECTOR ConvertAxesToEulerAngles(const Axes& axes);
+	[[nodiscard]] VECTOR ConvertAxisToEulerAngles(const Axis& axis);
 
 	/// @brief 回転行列からオイラー角へ変換
 	/// @brief FIXME : 不具合ありな可能性あり。要検証
@@ -85,7 +85,7 @@ namespace math
 	[[nodiscard]] VECTOR ConvertZXYRotMatrixToEulerAngles(const MATRIX& rot_matrix);
 
 	/// @brief 回転行列(回転順は問わない)からXYZ軸へ変換
-	[[nodiscard]] Axes ConvertRotMatrixToAxes(const MATRIX& rot_matrix);
+	[[nodiscard]] Axis ConvertRotMatrixToAxis(const MATRIX& rot_matrix);
 
 	/// @brief オイラー角から回転行列へ変換
 	[[nodiscard]] MATRIX ConvertEulerAnglesToXYZRotMatrix(const VECTOR& angle);
@@ -205,9 +205,9 @@ namespace math
 	/// @param current_value 現在の値
 	/// @param target_value 目的の値
 	/// @param damping 減衰値(時定数)
-	/// @param parent_axes 基準とする軸
+	/// @param parent_axis 基準とする軸
 	/// @return 減衰後の値
-	[[nodiscard]] VECTOR GetDampedValueOnAxes(const VECTOR& current_value, const VECTOR& target_value, const VECTOR& damping, const Axes& parent_axes, const float delta_time);
+	[[nodiscard]] VECTOR GetDampedValueOnAxis(const VECTOR& current_value, const VECTOR& target_value, const VECTOR& damping, const Axis& parent_axis, const float delta_time);
 	#pragma endregion
 
 
@@ -341,8 +341,8 @@ namespace math
 
 	/// @brief XYZ軸を取得
 	/// @param dir 向きベクトル(この値をZ軸とする)
-	/// @param parent_axes 親とするXYZ軸
-	[[nodiscard]] Axes GetAxes(const VECTOR& dir, const Axes& parent_axes);
+	/// @param parent_axis 親とするXYZ軸
+	[[nodiscard]] Axis GetAxis(const VECTOR& dir, const Axis& parent_axis);
 	#pragma endregion
 
 

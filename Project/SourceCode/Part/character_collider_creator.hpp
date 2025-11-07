@@ -15,6 +15,10 @@ public:
 	/// @brief WARNING : カプセルコライダーが生成された後に呼び出す必要あり
 	void CreateLandingTrigger	(PhysicalObjBase* physical_obj, const float sphere_radius);
 
+	/// @brief 投影用光線を生成
+	/// @brief WARNING : カプセルコライダーが生成された後に呼び出す必要あり
+	void CreateProjectRay		(PhysicalObjBase* physical_obj, const float length);
+
 	/// @brief 視界用トリガーを生成
 	void CreateVisionTrigger	(PhysicalObjBase* physical_obj, std::shared_ptr<Modeler>& modeler, const float lenfth, const float fov);
 
@@ -46,6 +50,11 @@ public:
 	/// @brief カプセルコライダーに依存して位置が計算される
 	/// @brief カプセルが消失した場合、計算は行われない
 	void CalcLandingTriggerPos	(std::shared_ptr<Modeler>& modeler, const std::unordered_map<ColliderKind, std::shared_ptr<Collider>>& collider);
+	
+	/// @brief 投影用光線の位置を計算
+	/// @brief カプセルコライダーに依存して位置が計算される
+	/// @brief カプセルが消失した場合、計算は行われない
+	void CalcProjectRayPos		(std::shared_ptr<Modeler>& modeler, const std::unordered_map<ColliderKind, std::shared_ptr<Collider>>& collider);
 
 	/// @brief 視界用トリガーの位置を計算
 	/// @brief WARNING : トリガーが円錐であることを前提としている(軽量化を優先)

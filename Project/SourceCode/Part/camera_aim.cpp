@@ -28,10 +28,10 @@ void CameraAim::CalcAimPos()
 	m_destination_aim_pos = m_target_transform->GetPos(CoordinateKind::kWorld);
 
 	// カメラの軸をもとに位置を修正
-	const auto target_axes = m_target_transform->GetAxes(CoordinateKind::kWorld);
-	m_destination_aim_pos += target_axes.x_axis * m_tracked_obj_offset.x;
-	m_destination_aim_pos += target_axes.y_axis * m_tracked_obj_offset.y;
-	m_destination_aim_pos += target_axes.z_axis * m_tracked_obj_offset.z;
+	const auto target_axis = m_target_transform->GetAxis(CoordinateKind::kWorld);
+	m_destination_aim_pos += target_axis.x_axis * m_tracked_obj_offset.x;
+	m_destination_aim_pos += target_axis.y_axis * m_tracked_obj_offset.y;
+	m_destination_aim_pos += target_axis.z_axis * m_tracked_obj_offset.z;
 
 	//DrawSphere3D(m_destination_aim_pos, 3, 8, 0xffffff, 0xffffff, TRUE);
 }
@@ -39,11 +39,11 @@ void CameraAim::CalcAimPos()
 void CameraAim::CalcDampedAimPos()
 {
 	const auto time_manager = GameTimeManager::GetInstance();
-	const auto   owner_axes	= m_owner_transform->GetAxes(CoordinateKind::kWorld);
+	const auto   owner_axis	= m_owner_transform->GetAxis(CoordinateKind::kWorld);
 	const VECTOR damping	= { m_horizontal_damping, m_vertical_damping, 0.0f };
 
-	m_current_aim_pos = math::GetDampedValueOnAxes(m_current_aim_pos, m_destination_aim_pos, damping, 
-		owner_axes, time_manager->GetDeltaTime(TimeScaleLayerKind::kCamera));
+	m_current_aim_pos = math::GetDampedValueOnAxis(m_current_aim_pos, m_destination_aim_pos, damping, 
+		owner_axis, time_manager->GetDeltaTime(TimeScaleLayerKind::kCamera));
 
 	//DrawSphere3D(m_current_aim_pos, 3, 8, 0xffffff, 0xffffff, TRUE);
 }

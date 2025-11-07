@@ -2,7 +2,7 @@
 #include <cmath>
 #include <nlohmann/json.hpp>
 
-#include "../Concept/vector_concepts.hpp"
+#include "vector_concepts.hpp"
 
 template<typename ElemT>
 struct Vector2D
@@ -10,8 +10,8 @@ struct Vector2D
     ElemT x;
     ElemT y;
 
-    Vector2D  operator+() const              { return *this; }
-    Vector2D  operator-() const              { return Vector2D(-x, -y); }
+    Vector2D  operator+() const             { return *this; }
+	Vector2D  operator-() const				{ return { -x, -y }; }
 
     Vector2D& operator= (const Vector2D& v) { x = v.x;  y = v.y;  return *this; }
 
@@ -76,19 +76,19 @@ namespace v2d
 
 #pragma region from / to JSON
 template<v2d_concepts::ValidT VecT>
-inline void from_json(const nlohmann::json& data, VecT& vector)
+inline void from_json(const nlohmann::json& data, VecT& v)
 {
-	data.at("x").get_to(vector.x);
-	data.at("y").get_to(vector.y);
+	data.at("x").get_to(v.x);
+	data.at("y").get_to(v.y);
 }
 
 template<v2d_concepts::ValidT VecT>
-inline void to_json(nlohmann::json& data, const VecT& vector)
+inline void to_json(nlohmann::json& data, const VecT& v)
 {
 	data = nlohmann::json
 	{
-		{ "x",	vector.x },
-		{ "y",	vector.y }
+		{ "x", v.x },
+		{ "y", v.y }
 	};
 }
 #pragma endregion

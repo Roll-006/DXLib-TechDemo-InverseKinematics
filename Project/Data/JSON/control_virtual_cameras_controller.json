@@ -1,5 +1,5 @@
 {
-  "control_virtual_cameras_controller" : {
+  "control_virtual_cameras_controller": {
     "camera_aim_offset_basic_speed": 40.0,
     "max_vertical_input_angle": 60.0,
     "min_vertical_input_angle": -60.0,
@@ -94,9 +94,31 @@
         "is_track": false
       },
       "name": "rot_crouch_camera",
-      "priority": 1,
-      "transform": {
-        "local_matrix": [
+      "priority": 1
+    },
+    "freedom_control_camera": {
+      "aim": {
+        "bias": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "current_aim_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "dead_zone": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "destination_aim_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "horizontal_damping": 0.0,
+        "is_track": false,
+        "rot_matrix": [
           [
             1.0,
             0.0,
@@ -121,8 +143,48 @@
             0.0,
             1.0
           ]
-        ]
-      }
+        ],
+        "screen": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "soft_zone": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "tracked_obj_offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "vertical_damping": 0.0
+      },
+      "blend_activation_policy_kind": 0,
+      "body": {
+        "current_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "damping": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "destination_pos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "follow_offset": {
+          "x": 30.0,
+          "y": 20.0,
+          "z": -90.0
+        },
+        "is_track": false
+      },
+      "name": "freedom_camera",
+      "priority": 2
     },
     "rot_stand_control_camera": {
       "aim": {
@@ -212,35 +274,7 @@
         "is_track": false
       },
       "name": "rot_stand_camera",
-      "priority": 0,
-      "transform": {
-        "local_matrix": [
-          [
-            1.0,
-            0.0,
-            0.0,
-            0.0
-          ],
-          [
-            0.0,
-            1.0,
-            0.0,
-            0.0
-          ],
-          [
-            0.0,
-            0.0,
-            1.0,
-            0.0
-          ],
-          [
-            0.0,
-            0.0,
-            0.0,
-            1.0
-          ]
-        ]
-      }
+      "priority": 0
     },
     "tracked_obj_offset_rot_crouch_camera": {
       "x": 10.0,

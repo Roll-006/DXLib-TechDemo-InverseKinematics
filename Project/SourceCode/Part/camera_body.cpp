@@ -24,10 +24,10 @@ void CameraBody::CalcPos()
 	m_destination_pos = m_target_transform->GetPos(CoordinateKind::kWorld);
 
 	// ターゲットの軸をもとに位置を決定
-	const auto target_axes = m_target_transform->GetAxes(CoordinateKind::kWorld);
-	m_destination_pos += target_axes.x_axis * m_follow_offset.x;
-	m_destination_pos += target_axes.y_axis * m_follow_offset.y;
-	m_destination_pos += target_axes.z_axis * m_follow_offset.z;
+	const auto target_axis = m_target_transform->GetAxis(CoordinateKind::kWorld);
+	m_destination_pos += target_axis.x_axis * m_follow_offset.x;
+	m_destination_pos += target_axis.y_axis * m_follow_offset.y;
+	m_destination_pos += target_axis.z_axis * m_follow_offset.z;
 
 	m_owner_transform->SetPos(CoordinateKind::kWorld, m_destination_pos);
 }
@@ -35,11 +35,11 @@ void CameraBody::CalcPos()
 void CameraBody::CalcDampedPos()
 {
 	const auto time_manager = GameTimeManager::GetInstance();
-	const auto owner_axes	= m_owner_transform->GetAxes(CoordinateKind::kWorld);
+	const auto owner_axis	= m_owner_transform->GetAxis(CoordinateKind::kWorld);
 
-	m_current_pos = math::GetDampedValueOnAxes(
+	m_current_pos = math::GetDampedValueOnAxis(
 		m_current_pos, m_destination_pos, m_damping, 
-		owner_axes, time_manager->GetDeltaTime(TimeScaleLayerKind::kCamera));
+		owner_axis, time_manager->GetDeltaTime(TimeScaleLayerKind::kCamera));
 
 	m_owner_transform->SetPos(CoordinateKind::kWorld, m_current_pos);
 }

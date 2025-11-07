@@ -1,6 +1,7 @@
 #pragma once
+#include <Vector/vector_2d.hpp>
+
 #include "../Handle/handle_keeper.hpp"
-#include "../Calculation/vector_2d.hpp"
 #include "../Window/window.hpp"
 
 class Graphicer final

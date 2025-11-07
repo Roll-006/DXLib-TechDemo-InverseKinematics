@@ -12,9 +12,8 @@ FontHandler::~FontHandler()
 
 void FontHandler::CreateFontHandle()
 {
-	JSONLoader json_loader;
 	nlohmann::json data;
-	if (json_loader.Load("Data/JSON/font_data.json", data))
+	if (json_loader::Load("Data/JSON/font_data.json", data))
 	{
 		const auto font_json = data.at("font_data");
 		for (const auto [font_name, value] : font_json.items())

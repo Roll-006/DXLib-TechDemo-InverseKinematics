@@ -1,9 +1,9 @@
+#include <JSON/json_loader.hpp>
+#include <MixamoHelper/mixamo_helper.hpp>
+
 #include "player.hpp"
 #include "../Command/command_handler.hpp"
 #include "../State/PlayerState/player_state.hpp"
-#include "../JSON/json_loader.hpp"
-#include "../Debugger/mixamo_helper.hpp"
-#include "../DxlibHelper_h/dxlib_helper.h"
 
 Player::Player() :
 	CharacterBase(ObjName.PLAYER, ObjTag.PLAYER),
@@ -25,10 +25,10 @@ Player::Player() :
 	// コライダー・トリガーを設定
 	m_collider_creator->CreateCapsuleCollider	(this, m_modeler, kCapsuleRadius);
 	m_collider_creator->CreateLandingTrigger	(this, kLandingTriggerRadius);
+	m_collider_creator->CreateProjectRay		(this, 30.0f);
 	m_collider_creator->CreateVisibleTrigger	(this, m_modeler);
 
 	const auto pos = m_transform->GetPos(CoordinateKind::kWorld);
-	AddCollider(std::make_shared<Collider>(ColliderKind::kCollisionAreaTrigger, std::make_shared<Sphere>(pos + kCollisionAreaOffset, kCollisionAreaRadius), this));
 }
 
 Player::~Player()
@@ -58,6 +58,8 @@ void Player::Update()
 	CalcMoveVelocity();
 
 	m_collider_creator->CalcCapsuleColliderPos	(m_modeler, m_colliders);
+	m_collider_creator->CalcLandingTriggerPos	(m_modeler, m_colliders);
+	m_collider_creator->CalcProjectRayPos		(m_modeler, m_colliders);
 	m_collider_creator->CalcVisibleTriggerPos	(m_modeler, m_colliders);
 
 	ApplyLookDirToRot(m_look_dir.at(TimeKind::kCurrent));
@@ -74,8 +76,6 @@ void Player::Draw() const
 
 	//m_modeler->Draw();
 	mixamo_helper::DrawFrames(m_modeler->GetModelHandle(), true, true, true, false);
-
-	
 }
 
 void Player::OnCollide(const ColliderPairOneToOneData& hit_collider_pair)
@@ -89,6 +89,13 @@ void Player::OnCollide(const ColliderPairOneToOneData& hit_collider_pair)
 	{
 	case ColliderKind::kLandingTrigger:
 		m_is_landing = true;
+		break;
+
+	case ColliderKind::kProjectRay:
+		if (hit_collider_pair.intersection)
+		{
+			m_project_pos = hit_collider_pair.intersection;
+		}
 		break;
 
 	default:

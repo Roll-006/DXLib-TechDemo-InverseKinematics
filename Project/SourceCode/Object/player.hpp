@@ -59,7 +59,7 @@ private:
 	static constexpr float  kAcceleration						= 1.0f;					// 加速度(減速度も共通)
 
 	static constexpr float  kMoveDirOffsetSpeed					= 5.0f;					// 移動方向の補正速度
-	static constexpr float  kLookDirOffsetSpeed					= 4.0f;					// 見る方向の補正角度
+	static constexpr float  kLookDirOffsetSpeed					= 6.0f;					// 見る方向の補正角度
 
 	static constexpr int    kWalkStickSlopeLimit				= 15000;				// 歩き状態とするスティック傾きの上限
 
