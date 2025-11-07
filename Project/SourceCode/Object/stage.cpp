@@ -39,8 +39,6 @@ void Stage::Draw() const
 	if (!IsActive()) { return; }
 
 	m_modeler->Draw();
-
-	//DrawColliders();
 }
 
 void Stage::OnCollide(const ColliderPairOneToOneData& hit_collider_pair)

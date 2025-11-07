@@ -46,6 +46,7 @@ void SceneManager::DrawToShadowMap() const
 void SceneManager::Draw() const
 {
 	m_drawer->Draw(m_current_scene);
+	//CollisionManager::GetInstance()->Draw();
 	Debugger::GetInstance()->Draw();
 }
 

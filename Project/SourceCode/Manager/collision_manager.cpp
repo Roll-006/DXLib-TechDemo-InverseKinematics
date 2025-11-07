@@ -64,6 +64,14 @@ void CollisionManager::LateUpdate()
 	}
 }
 
+void CollisionManager::Draw() const
+{
+	for (const auto& obj : m_collide_objects)
+	{
+		obj->DrawColliders();
+	}
+}
+
 
 #pragma region “o˜^E‰ğœ
 void CollisionManager::AddCollideObj(const std::shared_ptr<PhysicalObjBase>& collide_obj)

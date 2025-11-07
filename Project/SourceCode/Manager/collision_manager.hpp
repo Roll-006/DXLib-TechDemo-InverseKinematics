@@ -13,6 +13,7 @@ class CollisionManager final : public SingletonBase<CollisionManager>
 {
 public:
 	void LateUpdate();
+	void Draw() const;
 
 
 	#pragma region “o˜^E‰ğœ

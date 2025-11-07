@@ -654,10 +654,10 @@
     <ClInclude Include="SourceCode\Scene\share_scene.hpp">
       <Filter>SourceCode\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\Debugger\model_frame_debug.cpp">
+    <ClInclude Include="SourceCode\Debugger\mixamo_helper.cpp">
       <Filter>SourceCode\Debugger</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\Debugger\model_frame_debug.hpp">
+    <ClInclude Include="SourceCode\Debugger\mixamo_helper.hpp">
       <Filter>SourceCode\Debugger</Filter>
     </ClInclude>
   </ItemGroup>

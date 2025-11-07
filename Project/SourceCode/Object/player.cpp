@@ -2,7 +2,7 @@
 #include "../Command/command_handler.hpp"
 #include "../State/PlayerState/player_state.hpp"
 #include "../JSON/json_loader.hpp"
-#include "../Debugger/model_frame_debug.hpp"
+#include "../Debugger/mixamo_helper.hpp"
 #include "../DxlibHelper_h/dxlib_helper.h"
 
 Player::Player() :
@@ -19,7 +19,7 @@ Player::Player() :
 
 	// 初期pos・dirを設定
 	m_look_dir[TimeKind::kCurrent] = m_look_dir[TimeKind::kNext] = VGet(0.0f, 0.0f, 1.0f);
-	m_transform->SetPos(CoordinateKind::kWorld, VGet(-146.2f, 95.0f, -756.0f));
+	m_transform->SetPos(CoordinateKind::kWorld, VGet(0.0f, 0.0f, 0.0f));
 	m_transform->SetRot(CoordinateKind::kWorld, m_look_dir.at(TimeKind::kCurrent));
 
 	// コライダー・トリガーを設定
@@ -73,10 +73,9 @@ void Player::Draw() const
 	if (!IsActive()) { return; }
 
 	//m_modeler->Draw();
-	model_frame_debug::DrawFrames(m_modeler->GetModelHandle(), true, true, true, false);
-	//DxLibHelper::DrawModelFrames(m_modeler->GetModelHandle(), "", 0.04f, 1.5f);
+	mixamo_helper::DrawFrames(m_modeler->GetModelHandle(), true, true, true, false);
 
-	//DrawColliders();
+	
 }
 
 void Player::OnCollide(const ColliderPairOneToOneData& hit_collider_pair)

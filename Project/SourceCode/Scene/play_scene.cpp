@@ -18,7 +18,7 @@ PlayScene::PlayScene() :
 
 	// ƒ‰ƒCƒg‚ÌÝ’è
 	const auto light_holder = LightHolder::GetInstance();
-	light_holder->CreateLight(std::make_shared<DirectionalLight>(LightName.MOONLIGHT, 0, v3d::GetNormalizedV(VGet(0.5f, -0.5f, 0.5f))));
+	light_holder->CreateLight(std::make_shared<DirectionalLight>(LightName.MOONLIGHT, 0, v3d::GetNormalizedV(VGet(0.0f, -1.0f, -0.5f))));
 
 	const auto game_time_manager = GameTimeManager::GetInstance();
 	game_time_manager->InitTimeScale();

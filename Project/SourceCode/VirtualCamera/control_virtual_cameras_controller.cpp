@@ -38,7 +38,7 @@ ControlVirtualCamerasController::ControlVirtualCamerasController(Player& player)
 	}
 
 	const auto cinemachine_brain = CinemachineBrain::GetInstance();
-	cinemachine_brain->SetBlendTime(1.0f);
+	cinemachine_brain->SetBlendTime(0.2f);
 	cinemachine_brain->AddVirtualCamera(m_rot_stand_control_camera,  true);
 	cinemachine_brain->AddVirtualCamera(m_rot_crouch_control_camera, false);
 }

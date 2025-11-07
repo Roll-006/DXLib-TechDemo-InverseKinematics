@@ -46,7 +46,7 @@ void MainCamera::Draw() const
 {
 	if (!IsActive()) { return; }
 
-	//DrawColliders();
+	
 }
 
 void MainCamera::OnCollide(const ColliderPairOneToOneData& hit_collider_pair)

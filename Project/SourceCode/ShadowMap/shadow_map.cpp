@@ -7,7 +7,7 @@ ShadowMap::ShadowMap() :
 	m_max_offset_pos	(kMaxOffsetPos),
 	m_shadow_map_handle	(MakeShadowMap(kSizeX, kSizeY))
 {
-	SetShadowMapLightDirection(m_shadow_map_handle, v3d::GetNormalizedV(VGet(0.5f, -0.5f, 0.5f)));
+	SetShadowMapLightDirection(m_shadow_map_handle, v3d::GetNormalizedV(VGet(0.0f, -1.0f, -0.5f)));
 }
 
 ShadowMap::~ShadowMap()

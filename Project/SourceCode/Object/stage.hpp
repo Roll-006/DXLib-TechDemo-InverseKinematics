@@ -29,6 +29,6 @@ public:
 private:
 	std::shared_ptr<Modeler> m_modeler;
 
-	static constexpr float  kBasicScale = 50.0f;
-	static constexpr VECTOR kPos		= { 0.0f, 200.0f, 0.0f };
+	static constexpr float  kBasicScale = 4.0f;
+	static constexpr VECTOR kPos		= { 0.0f, 0.0f, 0.0f };
 };

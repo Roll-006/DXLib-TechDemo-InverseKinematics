@@ -256,8 +256,8 @@
     <ClInclude Include="SourceCode\Data\collider_pair_data.hpp" />
     <ClInclude Include="SourceCode\Data\input_data.hpp" />
     <ClInclude Include="SourceCode\Debugger\debugger.hpp" />
-    <ClInclude Include="SourceCode\Debugger\model_frame_debug.cpp" />
-    <ClInclude Include="SourceCode\Debugger\model_frame_debug.hpp" />
+    <ClInclude Include="SourceCode\Debugger\mixamo_helper.cpp" />
+    <ClInclude Include="SourceCode\Debugger\mixamo_helper.hpp" />
     <ClInclude Include="SourceCode\Drawer\drawer.hpp" />
     <ClInclude Include="SourceCode\Event\event.hpp" />
     <ClInclude Include="SourceCode\Event\event_system.hpp" />
