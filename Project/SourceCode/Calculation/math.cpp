@@ -664,6 +664,12 @@ VECTOR math::GetYawRotVector(const VECTOR& v)
     return VGet(0.0f, GetYaw(v), 0.0f);
 }
 
+float math::GetPitch(const VECTOR& v)
+{
+    return atan2f(v.y, v.x);
+    //return atan2f(v.y, sqrtf(v.x * v.x + v.z * v.z));
+}
+
 Axis math::GetAxis(const VECTOR& dir, const Axis& parent_axis)
 {
     // directionを基準として各軸を取得

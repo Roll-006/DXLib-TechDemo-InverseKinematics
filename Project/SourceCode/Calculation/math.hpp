@@ -339,6 +339,11 @@ namespace math
 	/// @brief ヨー角(Y軸)回転ベクトルを取得
 	[[nodiscard]] VECTOR GetYawRotVector(const VECTOR& v);
 
+	/// @brief TODO : 未検証
+	/// @param v 
+	/// @return 
+	[[nodiscard]] float GetPitch(const VECTOR& v);
+
 	/// @brief XYZ軸を取得
 	/// @param dir 向きベクトル(この値をZ軸とする)
 	/// @param parent_axis 親とするXYZ軸

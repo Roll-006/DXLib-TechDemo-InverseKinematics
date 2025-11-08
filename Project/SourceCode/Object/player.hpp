@@ -3,6 +3,7 @@
 
 #include "../GameTime/game_time_manager.hpp"
 #include "../Animator/player_animator.hpp"
+#include "../AnimationIK/animation_ik.hpp"
 
 class PlayerState;
 
@@ -73,4 +74,9 @@ private:
 private:
 	std::shared_ptr<PlayerState>	m_state;
 	VECTOR							m_input_slope;
+
+	// 仮
+	AnimationIK anim_ik;
+	VECTOR destination;
+	VECTOR prev_destination;
 };

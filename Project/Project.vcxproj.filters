@@ -46,9 +46,6 @@
     <ClCompile Include="SourceCode\Object\player.cpp">
       <Filter>SourceCode\Object</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\Object\skydome.cpp">
-      <Filter>SourceCode\Object</Filter>
-    </ClCompile>
     <ClCompile Include="SourceCode\Part\bone_pos_corrector.cpp">
       <Filter>SourceCode\Part</Filter>
     </ClCompile>
@@ -229,6 +226,9 @@
     <ClCompile Include="SourceCode\Scene\share_scene.cpp">
       <Filter>SourceCode\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\AnimationIK\animation_ik.cpp">
+      <Filter>SourceCode\AnimationIK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\Base\character_base.hpp">
@@ -310,9 +310,6 @@
       <Filter>SourceCode\Object</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\Object\player.hpp">
-      <Filter>SourceCode\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\Object\skydome.hpp">
       <Filter>SourceCode\Object</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\Part\bone_pos_corrector.hpp">
@@ -654,6 +651,9 @@
     <ClInclude Include="OriginalLibrary\JSON\json_loader.hpp">
       <Filter>OriginalLibrary\JSON</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\AnimationIK\animation_ik.hpp">
+      <Filter>SourceCode\AnimationIK</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="SourceCode">
@@ -799,6 +799,9 @@
     </Filter>
     <Filter Include="OriginalLibrary\Axis">
       <UniqueIdentifier>{844967a4-6b1a-4f57-81a9-e669d0da26f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCode\AnimationIK">
+      <UniqueIdentifier>{dfadbd43-d8c8-4845-8e8f-5f3378af126d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

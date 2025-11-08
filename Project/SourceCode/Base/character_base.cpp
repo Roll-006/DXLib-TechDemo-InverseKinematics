@@ -9,7 +9,7 @@ CharacterBase::CharacterBase(const std::string& name, const std::string& tag) :
 	m_collider_creator		(std::make_shared<CharacterColliderCreator>()),
 	m_move_dir				{ {TimeKind::kCurrent, v3d::GetZeroV()},{TimeKind::kNext, v3d::GetZeroV()} },
 	m_look_dir				{ {TimeKind::kCurrent, v3d::GetZeroV()},{TimeKind::kNext, v3d::GetZeroV()} },
-	m_destination_pos		(v3d::GetZeroV()),
+	m_destination		(v3d::GetZeroV()),
 	m_move_speed			(0.0f),
 	m_move_dir_offset_speed	(0.0f),
 	m_look_dir_offset_speed	(0.0f),
@@ -40,15 +40,15 @@ void CharacterBase::CalcCorrectMoveDir()
 {
 	const auto current_pos			= m_transform->GetPos(CoordinateKind::kWorld);
 	const auto current_pos_y0		= VGet(current_pos.x, 0.0f, current_pos.z);
-	const auto destination_pos_y0	= VGet(m_destination_pos.x, 0.0f, m_destination_pos.z);
+	const auto destination_y0	= VGet(m_destination.x, 0.0f, m_destination.z);
 
-	if (VSize(destination_pos_y0 - current_pos_y0) < 1.0f)
+	if (VSize(destination_y0 - current_pos_y0) < 1.0f)
 	{
 		m_move_dir.at(TimeKind::kNext) = v3d::GetZeroV();
 	}
 	else
 	{
-		m_move_dir.at(TimeKind::kNext) = v3d::GetNormalizedV(destination_pos_y0 - current_pos_y0);
+		m_move_dir.at(TimeKind::kNext) = v3d::GetNormalizedV(destination_y0 - current_pos_y0);
 	}
 }
 

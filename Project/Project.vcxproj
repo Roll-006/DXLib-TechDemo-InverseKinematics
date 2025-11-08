@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="SourceCode\Algorithm\algorithm.cpp" />
     <ClCompile Include="SourceCode\Algorithm\a_star.cpp" />
+    <ClCompile Include="SourceCode\AnimationIK\animation_ik.cpp" />
     <ClCompile Include="SourceCode\Animator\player_animator.cpp" />
     <ClCompile Include="SourceCode\Base\animator_base.cpp" />
     <ClCompile Include="SourceCode\Base\character_base.cpp" />
@@ -175,7 +176,6 @@
     <ClCompile Include="SourceCode\Object\main_camera.cpp" />
     <ClCompile Include="SourceCode\Object\stage.cpp" />
     <ClCompile Include="SourceCode\Object\player.cpp" />
-    <ClCompile Include="SourceCode\Object\skydome.cpp" />
     <ClCompile Include="SourceCode\Part\character_collider_creator.cpp" />
     <ClCompile Include="SourceCode\Part\gauge.cpp" />
     <ClCompile Include="SourceCode\Part\bone_pos_corrector.cpp" />
@@ -228,6 +228,7 @@
     <ClInclude Include="OriginalLibrary\Vector\vector_concepts.hpp" />
     <ClInclude Include="SourceCode\Algorithm\algorithm.hpp" />
     <ClInclude Include="SourceCode\Algorithm\a_star.hpp" />
+    <ClInclude Include="SourceCode\AnimationIK\animation_ik.hpp" />
     <ClInclude Include="SourceCode\Animator\player_animator.hpp" />
     <ClInclude Include="SourceCode\Base\animator_base.hpp" />
     <ClInclude Include="SourceCode\Base\character_base.hpp" />
@@ -313,7 +314,6 @@
     <ClInclude Include="SourceCode\Object\main_camera.hpp" />
     <ClInclude Include="SourceCode\Object\stage.hpp" />
     <ClInclude Include="SourceCode\Object\player.hpp" />
-    <ClInclude Include="SourceCode\Object\skydome.hpp" />
     <ClInclude Include="SourceCode\Part\character_collider_creator.hpp" />
     <ClInclude Include="SourceCode\Part\mask_creator.hpp" />
     <ClInclude Include="SourceCode\Part\gauge.hpp" />

@@ -53,7 +53,7 @@ private:
 	std::shared_ptr<Transform> m_owner_transform;
 	std::shared_ptr<Transform> m_target_transform;
 
-	VECTOR m_destination_pos;		// 目的とする座標
+	VECTOR m_destination;		// 目的とする座標
 	VECTOR m_current_pos;			// 現在の座標
 
 	VECTOR m_follow_offset;			// カメラの補正座標(オフセット)
@@ -72,7 +72,7 @@ private:
 #pragma region from / to JSON
 inline void from_json(const nlohmann::json& data, CameraBody& body)
 {
-	data.at("destination_pos")	.get_to(body.m_destination_pos);
+	data.at("destination")	.get_to(body.m_destination);
 	data.at("current_pos")		.get_to(body.m_current_pos);
 	data.at("follow_offset")	.get_to(body.m_follow_offset);
 	data.at("damping")			.get_to(body.m_damping);
@@ -83,7 +83,7 @@ inline void to_json(nlohmann::json& data, const CameraBody& body)
 {
 	data = nlohmann::json
 	{
-		{ "destination_pos",	body.m_destination_pos },
+		{ "destination",	body.m_destination },
 		{ "current_pos",		body.m_current_pos },
 		{ "follow_offset",		body.m_follow_offset },
 		{ "damping",			body.m_damping },

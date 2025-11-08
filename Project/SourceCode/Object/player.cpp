@@ -10,6 +10,9 @@ Player::Player() :
 	m_state			(std::make_shared<PlayerState>()),
 	m_input_slope	(v3d::GetZeroV())
 {
+	destination = prev_destination = v3d::GetZeroV();
+
+
 	mass_kind = MassKind::kMedium;
 	
 	// モデル・アニメーションを設定
@@ -51,7 +54,50 @@ void Player::Update()
 	m_look_dir_offset_speed				= kLookDirOffsetSpeed;
 
 	m_state		->Update(std::static_pointer_cast<Player>(shared_from_this()));
-	m_animator	->Update();
+	//m_animator	->Update();
+
+
+
+	// 仮
+	const auto	input	= InputChecker::GetInstance();
+	auto		dir		= v3d::GetZeroV();
+
+	if (input->IsInput(KEY_INPUT_1))
+	{
+		dir -= GetMoveRight();
+	}
+	if (input->IsInput(KEY_INPUT_2))
+	{
+		dir += GetMoveRight();
+	}
+	if (input->IsInput(KEY_INPUT_3))
+	{
+		dir += GetMoveForward();
+	}
+	if (input->IsInput(KEY_INPUT_4))
+	{
+		dir -= GetMoveForward();
+	}
+	if (input->IsInput(KEY_INPUT_5))
+	{
+		dir += axis::GetWorldYAxis();
+	}
+	if (input->IsInput(KEY_INPUT_6))
+	{
+		dir -= axis::GetWorldYAxis();
+	}
+	dir = v3d::GetNormalizedV(dir);
+	prev_destination = destination;
+	destination += dir * 10.0f * GetDeltaTime();
+	//if (destination != prev_destination)
+	{
+		anim_ik.Test(m_modeler->GetModelHandle(), destination);
+	}
+	DrawSphere3D(destination, 4, 8, 0xffffff, 0xffffff, TRUE);
+	
+
+
+
 
 	CalcMoveDir();
 	CalcLookDir();

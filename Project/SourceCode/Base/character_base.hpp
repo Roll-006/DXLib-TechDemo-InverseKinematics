@@ -47,7 +47,7 @@ protected:
 
 	std::unordered_map<TimeKind, VECTOR>		m_move_dir;					// 移動方向(WARNING : 長さは0～1の範囲を取る)
 	std::unordered_map<TimeKind, VECTOR>		m_look_dir;					// 向いている方向
-	VECTOR										m_destination_pos;			// 補正先座標
+	VECTOR										m_destination;			// 補正先座標
 	float										m_move_speed;
 	float										m_move_dir_offset_speed;	// 移動方向を補正する速度
 	float										m_look_dir_offset_speed;	// 見る方向の補正速度

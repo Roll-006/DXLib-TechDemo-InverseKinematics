@@ -186,10 +186,10 @@ void Transform::SetRot(const CoordinateKind coord_kind, const VECTOR& forward)
 
 void Transform::SetScale(const CoordinateKind coord_kind, const VECTOR& scale)
 {
-	const MATRIX scale_m = MGetScale(scale);
-	const MATRIX rot_m = GetRotMatrix(coord_kind);
-	const MATRIX pos_m = MGetTranslate(GetPos(coord_kind));
-	const MATRIX result_m = scale_m * rot_m * pos_m;
+	const MATRIX scale_m	= MGetScale(scale);
+	const MATRIX rot_m		= GetRotMatrix(coord_kind);
+	const MATRIX pos_m		= MGetTranslate(GetPos(coord_kind));
+	const MATRIX result_m	= scale_m * rot_m * pos_m;
 
 	switch (coord_kind)
 	{

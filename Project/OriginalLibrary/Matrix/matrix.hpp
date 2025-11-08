@@ -32,6 +32,54 @@ inline bool operator!=(const MATRIX& mat1, const MATRIX& mat2) { return !(mat1 =
 
 namespace matrix
 {
+	/// @brief X²‰ñ“](ƒsƒbƒ`²‰ñ“])‚ğcosƒÆAsinƒÆ‚©‚ç¶¬
+	[[nodiscard]] inline MATRIX CreateXMatrix(const float cos_theta, const float sin_theta)
+	{
+		auto mat = MGetIdent();
+		mat.m[0][0] = 1.0f;			mat.m[0][1] = 0.0f;			mat.m[0][2] = 0.0f;			mat.m[0][3] = 0.0f;
+		mat.m[1][0] = 0.0f;			mat.m[1][1] =  cos_theta;	mat.m[1][2] = sin_theta;	mat.m[1][3] = 0.0f;
+		mat.m[2][0] = 0.0f;			mat.m[2][1] = -sin_theta;	mat.m[2][2] = cos_theta;	mat.m[2][3] = 0.0f;
+		mat.m[3][0] = 0.0f;			mat.m[3][1] = 0.0f;			mat.m[3][2] = 0.0f;			mat.m[3][3] = 1.0f;
+		return mat;
+	}
+
+	/// @brief Y²‰ñ“](ƒˆ[²‰ñ“])‚ğcosƒÆAsinƒÆ‚©‚ç¶¬
+	[[nodiscard]] inline MATRIX CreateYMatrix(const float cos_theta, const float sin_theta)
+	{
+		auto mat = MGetIdent();
+		mat.m[0][0] = cos_theta;	mat.m[0][1] = 0.0f;			mat.m[0][2] = -sin_theta;	mat.m[0][3] = 0.0f;
+		mat.m[1][0] = 0.0f;			mat.m[1][1] = 1.0f;			mat.m[1][2] = 0.0f;			mat.m[1][3] = 0.0f;
+		mat.m[2][0] = sin_theta;	mat.m[2][1] = 0.0f;			mat.m[2][2] =  cos_theta;	mat.m[2][3] = 0.0f;
+		mat.m[3][0] = 0.0f;			mat.m[3][1] = 0.0f;			mat.m[3][2] = 0.0f;			mat.m[3][3] = 1.0f;
+		return mat;
+	}
+
+	/// @brief Z²‰ñ“](ƒ[ƒ‹²‰ñ“])‚ğcosƒÆAsinƒÆ‚©‚ç¶¬
+	[[nodiscard]] inline MATRIX CreateZMatrix(const float cos_theta, const float sin_theta)
+	{
+		auto mat = MGetIdent();
+		mat.m[0][0] =  cos_theta;	mat.m[0][1] = sin_theta;	mat.m[0][2] = 0.0f;			mat.m[0][3] = 0.0f;
+		mat.m[1][0] = -sin_theta;	mat.m[1][1] = cos_theta;	mat.m[1][2] = 0.0f;			mat.m[1][3] = 0.0f;
+		mat.m[2][0] = 0.0f;			mat.m[2][1] = 0.0f;			mat.m[2][2] = 1.0f;			mat.m[2][3] = 0.0f;
+		mat.m[3][0] = 0.0f;			mat.m[3][1] = 0.0f;			mat.m[3][2] = 0.0f;			mat.m[3][3] = 1.0f;
+		return mat;
+	}
+
+	inline void SetRot(MATRIX& mat, const MATRIX& rot_mat)
+	{
+		mat.m[0][0] = rot_mat.m[0][0];
+		mat.m[1][0] = rot_mat.m[1][0];
+		mat.m[2][0] = rot_mat.m[2][0];
+
+		mat.m[0][1] = rot_mat.m[0][1];
+		mat.m[1][1] = rot_mat.m[1][1];
+		mat.m[2][1] = rot_mat.m[2][1];
+
+		mat.m[0][2] = rot_mat.m[0][2];
+		mat.m[1][2] = rot_mat.m[1][2];
+		mat.m[2][2] = rot_mat.m[2][2];
+	}
+
 	inline void SetPos(MATRIX& mat, const VECTOR& pos)
 	{
 		mat.m[3][0] = pos.x;

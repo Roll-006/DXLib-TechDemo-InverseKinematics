@@ -3,7 +3,7 @@
 CameraBody::CameraBody(const std::shared_ptr<Transform>& owner_transform) :
 	m_owner_transform	(owner_transform),
 	m_target_transform	(nullptr),
-	m_destination_pos	(v3d::GetZeroV()),
+	m_destination	(v3d::GetZeroV()),
 	m_current_pos		(v3d::GetZeroV()),
 	m_follow_offset		(v3d::GetZeroV()),
 	m_damping			(v3d::GetZeroV()),
@@ -21,15 +21,15 @@ CameraBody::~CameraBody()
 
 void CameraBody::CalcPos()
 {
-	m_destination_pos = m_target_transform->GetPos(CoordinateKind::kWorld);
+	m_destination = m_target_transform->GetPos(CoordinateKind::kWorld);
 
 	// ターゲットの軸をもとに位置を決定
 	const auto target_axis = m_target_transform->GetAxis(CoordinateKind::kWorld);
-	m_destination_pos += target_axis.x_axis * m_follow_offset.x;
-	m_destination_pos += target_axis.y_axis * m_follow_offset.y;
-	m_destination_pos += target_axis.z_axis * m_follow_offset.z;
+	m_destination += target_axis.x_axis * m_follow_offset.x;
+	m_destination += target_axis.y_axis * m_follow_offset.y;
+	m_destination += target_axis.z_axis * m_follow_offset.z;
 
-	m_owner_transform->SetPos(CoordinateKind::kWorld, m_destination_pos);
+	m_owner_transform->SetPos(CoordinateKind::kWorld, m_destination);
 }
 
 void CameraBody::CalcDampedPos()
@@ -38,7 +38,7 @@ void CameraBody::CalcDampedPos()
 	const auto owner_axis	= m_owner_transform->GetAxis(CoordinateKind::kWorld);
 
 	m_current_pos = math::GetDampedValueOnAxis(
-		m_current_pos, m_destination_pos, m_damping, 
+		m_current_pos, m_destination, m_damping, 
 		owner_axis, time_manager->GetDeltaTime(TimeScaleLayerKind::kCamera));
 
 	m_owner_transform->SetPos(CoordinateKind::kWorld, m_current_pos);

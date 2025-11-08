@@ -3,7 +3,6 @@
 
 #include "../Object/player.hpp"
 #include "../Object/stage.hpp"
-#include "../Object/skydome.hpp"
 
 #include "../Light/light_holder.hpp"
 #include "../VirtualCamera/cinemachine_brain.hpp"
@@ -34,5 +33,4 @@ private:
 
 	std::shared_ptr<Player>	 m_player;
 	std::shared_ptr<Stage>	 m_stage;
-	std::shared_ptr<Skydome> m_skydome;
 };

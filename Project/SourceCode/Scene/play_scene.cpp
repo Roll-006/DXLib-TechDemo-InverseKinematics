@@ -6,8 +6,7 @@ PlayScene::PlayScene() :
 	m_scene_kind	(SceneKind::kPlay),
 	m_elapsed_time	(0.0f),
 	m_player		(std::make_shared<Player>()),
-	m_stage			(std::make_shared<Stage>()),
-	m_skydome		(std::make_shared<Skydome>())
+	m_stage			(std::make_shared<Stage>())
 {
 	m_player->AddToObjManager();
 	m_stage->AddToObjManager();
@@ -46,14 +45,12 @@ void PlayScene::Update()
 {
 	m_player	->Update();
 	m_stage		->Update();
-	m_skydome	->Update();
 }
 
 void PlayScene::LateUpdate()
 {
 	m_player	->LateUpdate();
 	m_stage		->LateUpdate();
-	m_skydome	->LateUpdate();
 }
 
 void PlayScene::DrawToShadowMap() const
@@ -66,7 +63,6 @@ void PlayScene::Draw() const
 {
 	m_player	->Draw();
 	m_stage		->Draw();
-	m_skydome	->Draw();
 }
 
 std::shared_ptr<IScene> PlayScene::ChangeScene()
