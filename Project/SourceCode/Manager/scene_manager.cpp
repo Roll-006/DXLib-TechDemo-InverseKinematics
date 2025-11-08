@@ -30,12 +30,14 @@ void SceneManager::Update()
 void SceneManager::LateUpdate()
 {
 	PhysicsManager	::GetInstance()->LateUpdate();
-	CollisionManager::GetInstance()->LateUpdate();
 
 	m_share_scene	->LateUpdate();
 	m_current_scene	->LateUpdate();
 
-	PhysicsManager	::GetInstance()->ProjectionPos();
+	// MEMO : LateUpdate‚ÌˆÚ“®‚ÍRayCast‚Ì‹““®‚ð•ö‰ó‚³‚¹‚é‚±‚Æ‚É‚È‚é
+	CollisionManager::GetInstance()->LateUpdate();
+
+	PhysicsManager	::GetInstance()->ProjectPos();
 	InputChecker	::GetInstance()->LateUpdate();
 }
 

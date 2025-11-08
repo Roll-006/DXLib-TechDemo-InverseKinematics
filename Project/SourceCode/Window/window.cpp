@@ -4,6 +4,11 @@ Window::Window():
 	m_is_full_screen		(true),
 	m_change_window_count	(m_is_full_screen ? 1 : 0)
 {
+	# ifdef _DEBUG
+	m_is_full_screen		= false;
+	m_change_window_count	= 0;
+	# endif
+
 	SetWindowMode(m_is_full_screen);
 }
 

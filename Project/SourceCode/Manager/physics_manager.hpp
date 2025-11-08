@@ -11,7 +11,7 @@ public:
 	void Update();
 	void LateUpdate();
 
-	void ProjectionPos();
+	void ProjectPos();
 
 
 	#pragma region “o˜^E‰ğœ

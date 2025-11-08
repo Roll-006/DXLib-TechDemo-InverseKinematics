@@ -12,13 +12,13 @@ void CharacterColliderCreator::CreateCapsuleCollider(PhysicalObjBase* physical_o
 	CalcCapsuleColliderDirAndLength(modeler, physical_obj->GetColliderAll(), transform);
 }
 
-void CharacterColliderCreator::CreateLandingTrigger	(PhysicalObjBase* physical_obj, const float sphere_radius)
+void CharacterColliderCreator::CreateLandingRay		(PhysicalObjBase* physical_obj, const float lenght)
 {
 	// TODO : カプセルのサイズの比率によってずらし量を自動で設定させるように変更
 	const auto capsule		= std::static_pointer_cast<Capsule>(physical_obj->GetCollider(ColliderKind::kCollider)->GetShape());
 	const auto pos			= capsule->GetSegment().GetBeginPos() - VGet(0.0f, 5.0f, 0.0f);
 
-	physical_obj->AddCollider(std::make_shared<Collider>(ColliderKind::kLandingTrigger, std::make_shared<Sphere>(pos, sphere_radius), physical_obj));
+	physical_obj->AddCollider(std::make_shared<Collider>(ColliderKind::kLandingRay, std::make_shared<Segment>(pos, -axis::GetWorldYAxis(), lenght), physical_obj));
 }
 
 void CharacterColliderCreator::CreateProjectRay		(PhysicalObjBase* physical_obj, const float length)
@@ -133,18 +133,18 @@ void CharacterColliderCreator::CalcCapsuleColliderPos(std::shared_ptr<Modeler>& 
 	capsule->SetSegmentEndPos  (begin_pos + transform->GetUp(CoordinateKind::kWorld) * capsule_length, true);
 }
 
-void CharacterColliderCreator::CalcLandingTriggerPos(std::shared_ptr<Modeler>& modeler, const std::unordered_map<ColliderKind, std::shared_ptr<Collider>>& collider)
+void CharacterColliderCreator::CalcLandingRayPos(std::shared_ptr<Modeler>& modeler, const std::unordered_map<ColliderKind, std::shared_ptr<Collider>>& collider)
 {
 	if (!collider.count(ColliderKind::kCollider)) { return; }
 
 	modeler->ApplyMatrix();
 	const auto model_handle = modeler->GetModelHandle();
 
-	const auto sphere		= std::static_pointer_cast<Sphere> (collider.at(ColliderKind::kLandingTrigger)->GetShape());
-	const auto capsule		= std::static_pointer_cast<Capsule>(collider.at(ColliderKind::kCollider)	  ->GetShape());
+	const auto segment		= std::static_pointer_cast<Segment>(collider.at(ColliderKind::kLandingRay)->GetShape());
+	const auto capsule		= std::static_pointer_cast<Capsule>(collider.at(ColliderKind::kCollider)  ->GetShape());
 	const auto pos			= capsule->GetSegment().GetBeginPos() - VGet(0.0f, 5.0f, 0.0f);
 
-	sphere->SetPos(pos);
+	segment->SetBeginPos(pos, false);
 }
 
 void CharacterColliderCreator::CalcProjectRayPos	(std::shared_ptr<Modeler>& modeler, const std::unordered_map<ColliderKind, std::shared_ptr<Collider>>& collider)

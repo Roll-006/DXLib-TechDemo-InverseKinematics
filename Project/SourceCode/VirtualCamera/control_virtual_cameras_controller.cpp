@@ -283,24 +283,24 @@ void ControlVirtualCamerasController::JudgeUseFreedomCamera()
 
 	if (m_is_using_freedom_camera[TimeKind::kCurrent])
 	{
-		m_freedom_control_camera->Activate();
-
 		// アクティブ化されて最初のフレームは回転カメラの情報を引き継ぐ
 		if (!m_is_using_freedom_camera[TimeKind::kPrev])
 		{
 			m_freedom_aim_transform->SetMatrix(CoordinateKind::kWorld, m_rot_aim_transform->GetMatrix(CoordinateKind::kWorld));
 			m_freedom_camera_input_angle = m_rot_camera_input_angle;
 		}
+
+		m_freedom_control_camera->Activate();
 	}
 	else
 	{
-		m_freedom_control_camera->Deactivate();
-
 		if (m_is_using_freedom_camera[TimeKind::kPrev])
 		{
 			m_rot_aim_transform->SetRot(CoordinateKind::kWorld, m_freedom_aim_transform->GetRotMatrix(CoordinateKind::kWorld));
 			m_rot_camera_input_angle = m_freedom_camera_input_angle;
 		}
+
+		m_freedom_control_camera->Deactivate();
 	}
 }
 

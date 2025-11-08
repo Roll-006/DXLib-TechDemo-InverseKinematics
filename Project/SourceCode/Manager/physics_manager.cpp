@@ -32,7 +32,7 @@ void PhysicsManager::LateUpdate()
 			obj->AddFallVelocity();
 
 			// velocityが浮かないよう張り付ける
-			obj->ProjectionVelocity();
+			obj->ProjectVelocity();
 		}
 	}
 
@@ -43,27 +43,49 @@ void PhysicsManager::LateUpdate()
 	{
 		// velocityをオブジェクトに適用
 		obj->ApplyVelocity();
+		obj->RemoveProjectPos();
 	}
 }
 
-void PhysicsManager::ProjectionPos()
+void PhysicsManager::ProjectPos()
 {
 	for (const auto& obj : m_physical_objects)
 	{
-		if (!obj->IsActive()) { return; }
-		if (obj->IsLanding()) { return; }
+		if (!obj->IsActive())	{ continue; }
+		if (obj->IsLanding())	{ continue; }
 
 		const auto project_pos = obj->GetProjectPos();
-		if (!project_pos) { return; }
+		if (!project_pos)		{ continue; }
+
+		const auto project_ray = obj->GetCollider(ColliderKind::kProjectRay);
+		if (!project_ray)		{ continue; }
 
 		const auto collider = obj->GetCollider(ColliderKind::kCollider);
-		if (!collider) { return; }
+		if (!collider)			{ continue; }
 
 		const auto capsule = std::dynamic_pointer_cast<Capsule>(collider->GetShape());
-		if (!capsule) { return; }
+		if (!capsule)			{ continue; }
 
-		const auto result_pos = *project_pos + axis::GetWorldYAxis() * capsule->GetRadius();
+		const auto hit_triangle = project_ray->GetHitTriangles();
+		if (hit_triangle.size() <= 0) { continue; }
+
+		// 光線の始点からの距離でソート
+		const auto future_begin_pos = *project_pos + axis::GetWorldYAxis() * capsule->GetRadius();
+		std::vector<std::pair<int, float>> distance;
+		for (size_t i = 0; i < hit_triangle.size(); ++i)
+		{
+			distance.emplace_back(i, math::GetDistancePointToTriangle(future_begin_pos, hit_triangle.at(i)));
+		}
+		algorithm::Sort(distance, SortKind::kAscending);
+
+		// 固定位置を決定
+		const auto penetration		= capsule->GetRadius() - distance.front().second;
+		const auto push_back_length	= math::GetHypotenuseLengthIsoscelesRightTriangle(penetration);
+
+		const auto result_pos = *project_pos + axis::GetWorldYAxis() * push_back_length;
 		obj->GetTransform()->SetPos(CoordinateKind::kWorld, result_pos);
+
+		printfDx("size : %d, dist : %f\n", hit_triangle.size(), push_back_length);
 	}
 }
 

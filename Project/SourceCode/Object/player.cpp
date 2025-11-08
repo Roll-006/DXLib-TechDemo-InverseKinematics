@@ -24,7 +24,7 @@ Player::Player() :
 
 	// コライダー・トリガーを設定
 	m_collider_creator->CreateCapsuleCollider	(this, m_modeler, kCapsuleRadius);
-	m_collider_creator->CreateLandingTrigger	(this, kLandingTriggerRadius);
+	m_collider_creator->CreateLandingRay		(this, 8.0f);
 	m_collider_creator->CreateProjectRay		(this, 30.0f);
 	m_collider_creator->CreateVisibleTrigger	(this, m_modeler);
 
@@ -58,7 +58,7 @@ void Player::Update()
 	CalcMoveVelocity();
 
 	m_collider_creator->CalcCapsuleColliderPos	(m_modeler, m_colliders);
-	m_collider_creator->CalcLandingTriggerPos	(m_modeler, m_colliders);
+	m_collider_creator->CalcLandingRayPos		(m_modeler, m_colliders);
 	m_collider_creator->CalcProjectRayPos		(m_modeler, m_colliders);
 	m_collider_creator->CalcVisibleTriggerPos	(m_modeler, m_colliders);
 
@@ -87,7 +87,7 @@ void Player::OnCollide(const ColliderPairOneToOneData& hit_collider_pair)
 
 	switch (hit_collider_pair.owner_collider->GetColliderKind())
 	{
-	case ColliderKind::kLandingTrigger:
+	case ColliderKind::kLandingRay:
 		m_is_landing = true;
 		break;
 
@@ -95,6 +95,7 @@ void Player::OnCollide(const ColliderPairOneToOneData& hit_collider_pair)
 		if (hit_collider_pair.intersection)
 		{
 			m_project_pos = hit_collider_pair.intersection;
+			DrawSphere3D(*m_project_pos, 3, 8, 0xffffff, 0xffffff, TRUE);
 		}
 		break;
 

@@ -20,7 +20,7 @@
     "visible_fov": 80.0,
     "hand_trigger_radius": 2.0,
     "head_trigger_radius": 6.0,
-    "landing_trigger_radius": 6.0,
+    "landing_ray_radius": 6.0,
     "up_body_trigger_radius": 6.0,
     "up_leg_trigger_radius": 3.5,
     "upper_arm_trigger_radius": 2.5,

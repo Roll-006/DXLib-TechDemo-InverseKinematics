@@ -35,9 +35,6 @@ public:
 	/// @brief 衝突した三角形の登録を解除する
 	void RemoveHitTriangles();
 
-	void RemoveHitCollider();
-	//void RemoveHitCollider(const int collider_handle);
-
 	/// @brief 重力を与える(適用させる)
 	/// @brief 物理管理クラスから適用される
 	/// @param gravity_acceleration 重力加速度 (デルタタイム適用前)
@@ -55,12 +52,13 @@ public:
 	void ApplyVelocity();
 
 	/// @brief 速度ベクトルを接している面に投影する
-	void ProjectionVelocity();
+	void ProjectVelocity();
 
 	void ApplyKnockbackVelocity();
 
 	/// @brief 着地判定を解除する
-	void ReleaseLanding() { m_is_landing = false; }
+	void ReleaseLanding()	{ m_is_landing  = false; }
+	void RemoveProjectPos() { m_project_pos = std::nullopt; }
 
 	void SetColliderModelHandle(const int model_handle) { m_model_handle = model_handle; }
 	void SetVelocity(const VECTOR& velocity) { m_velocity = velocity; }
@@ -73,6 +71,7 @@ public:
 	[[nodiscard]] VECTOR				GetFallVelocity()			const { return m_fall_velocity; }
 	[[nodiscard]] MassKind				GetMassKind()				const { return mass_kind; }
 	[[nodiscard]] bool					IsLanding()					const { return m_is_landing; }
+	[[nodiscard]] bool					IsProject()					const { return m_is_project; }
 	[[nodiscard]] std::shared_ptr<Collider> GetCollider(const ColliderKind kind) const;
 	[[nodiscard]] std::unordered_map<ColliderKind, std::shared_ptr<Collider>> GetColliderAll() const { return m_colliders; }
 
@@ -88,10 +87,9 @@ protected:
 	float	 m_knockback_deceleration;
 
 	bool	 m_is_landing;
-	bool	 m_is_using_projection_velocity;	// velocityを地面に張り付けるかを判定
+	bool	 m_is_project;	// 地面に張り付けるかを判定
 
 	std::unordered_map<ColliderKind, std::shared_ptr<Collider>> m_colliders;
-	std::unordered_map<std::shared_ptr<Collider>, bool> m_hit_colliders;
 
 private:
 	int		m_model_handle;

@@ -11,9 +11,9 @@ public:
 	/// @brief カプセルコライダーを生成
 	void CreateCapsuleCollider	(PhysicalObjBase* physical_obj, std::shared_ptr<Modeler>& modeler, const float capsule_radius);
 
-	/// @brief 着地トリガーを生成
+	/// @brief 着地判定用光線を生成
 	/// @brief WARNING : カプセルコライダーが生成された後に呼び出す必要あり
-	void CreateLandingTrigger	(PhysicalObjBase* physical_obj, const float sphere_radius);
+	void CreateLandingRay		(PhysicalObjBase* physical_obj, const float length);
 
 	/// @brief 投影用光線を生成
 	/// @brief WARNING : カプセルコライダーが生成された後に呼び出す必要あり
@@ -46,10 +46,10 @@ public:
 	/// @brief カプセルコライダーの位置を計算
 	void CalcCapsuleColliderPos	(std::shared_ptr<Modeler>& modeler, const std::unordered_map<ColliderKind, std::shared_ptr<Collider>>& collider);
 
-	/// @brief 着地トリガーの位置を計算
+	/// @brief 着地判定用光線の位置を計算
 	/// @brief カプセルコライダーに依存して位置が計算される
 	/// @brief カプセルが消失した場合、計算は行われない
-	void CalcLandingTriggerPos	(std::shared_ptr<Modeler>& modeler, const std::unordered_map<ColliderKind, std::shared_ptr<Collider>>& collider);
+	void CalcLandingRayPos		(std::shared_ptr<Modeler>& modeler, const std::unordered_map<ColliderKind, std::shared_ptr<Collider>>& collider);
 	
 	/// @brief 投影用光線の位置を計算
 	/// @brief カプセルコライダーに依存して位置が計算される
