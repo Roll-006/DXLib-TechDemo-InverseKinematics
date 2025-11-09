@@ -93,6 +93,4 @@ void AnimationIK::FrameIK(const int model_handle, const VECTOR& world_destinatio
 	const auto forward			= v3d::GetNormalizedV(end_world_pos - begin_world_pos);
 	const auto aid_axis			= CreateAxis(current_axis, forward);
 	const auto aid_rot_m		= math::ConvertAxisToRotMatrix(aid_axis);
-
-	axis::Draw(aid_axis, begin_world_pos, 50);
 }
