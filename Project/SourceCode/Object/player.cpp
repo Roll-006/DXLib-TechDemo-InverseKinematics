@@ -54,7 +54,7 @@ void Player::Update()
 	m_look_dir_offset_speed				= kLookDirOffsetSpeed;
 
 	m_state		->Update(std::static_pointer_cast<Player>(shared_from_this()));
-	//m_animator	->Update();
+	m_animator	->Update();
 
 
 
@@ -91,7 +91,7 @@ void Player::Update()
 	destination += dir * 10.0f * GetDeltaTime();
 	//if (destination != prev_destination)
 	{
-		anim_ik.Test(m_modeler->GetModelHandle(), destination);
+		anim_ik.LeftLegIK(m_modeler->GetModelHandle(), destination);
 	}
 	DrawSphere3D(destination, 4, 8, 0xffffff, 0xffffff, FALSE);
 	
