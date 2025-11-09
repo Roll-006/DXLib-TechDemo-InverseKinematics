@@ -93,7 +93,7 @@ void Player::Update()
 	{
 		anim_ik.Test(m_modeler->GetModelHandle(), destination);
 	}
-	DrawSphere3D(destination, 4, 8, 0xffffff, 0xffffff, TRUE);
+	DrawSphere3D(destination, 4, 8, 0xffffff, 0xffffff, FALSE);
 	
 
 
@@ -141,7 +141,6 @@ void Player::OnCollide(const ColliderPairOneToOneData& hit_collider_pair)
 		if (hit_collider_pair.intersection)
 		{
 			m_project_pos = hit_collider_pair.intersection;
-			DrawSphere3D(*m_project_pos, 3, 8, 0xffffff, 0xffffff, TRUE);
 		}
 		break;
 

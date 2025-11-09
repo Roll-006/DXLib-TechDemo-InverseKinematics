@@ -12,11 +12,7 @@ AnimationIK::~AnimationIK()
 
 void AnimationIK::Test(const int model_handle, const VECTOR& world_destination)
 {
-	const auto frame_index		= MV1SearchFrame(model_handle, BonePath.LEFT_HAND);
-	auto	   frame_m			= MV1GetFrameLocalMatrix(model_handle, frame_index);
-
-	CalcOneBoneIK(world_destination, frame_m);
-	MV1SetFrameUserLocalMatrix(model_handle, frame_index, frame_m);
+	CalcOneBoneIK(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.LEFT_HAND));
 }
 
 void AnimationIK::LegIK(const int model_handle)
@@ -24,45 +20,34 @@ void AnimationIK::LegIK(const int model_handle)
 
 }
 
-void AnimationIK::CalcOneBoneIK(const VECTOR& world_destination, MATRIX& frame_local_matrix)
+void AnimationIK::CalcOneBoneIK(const int model_handle, const VECTOR& world_destination, const int frame_index)
 {
-	//const auto bone_pos = MGetTranslateElem(bone_matrix);
-	//const auto local_destination = destination - bone_pos;
-	//const auto squared_x = std::pow(local_destination.x, 2);
-	//const auto squared_y = std::pow(local_destination.y, 2);
-	//const auto squared_z = std::pow(local_destination.z, 2);
+	auto	   child_local_m	= MV1GetFrameLocalMatrix(model_handle, frame_index);
+	const auto child_local_pos	= MGetTranslateElem(child_local_m);
+	auto	   child_world_m	= MV1GetFrameLocalWorldMatrix(model_handle, frame_index);
+	const auto child_world_pos	= MGetTranslateElem(child_world_m);
 
-	//// ヨー軸回転を取得
-	//const auto cos_y = local_destination.x / std::sqrt(squared_x + squared_z);
-	//const auto sin_y = local_destination.z / std::sqrt(squared_x + squared_z);
-	//const auto yaw_m = matrix::CreateYMatrix(cos_y, sin_y);
-
-	//// ピッチ軸回転値を取得
-	//const auto cos_x = std::sqrt(squared_x + squared_z) / std::sqrt(squared_x + squared_y + squared_z);
-	//const auto sin_x = local_destination.y / std::sqrt(squared_x + squared_y + squared_z);
-	//const auto pitch_m = matrix::CreateXMatrix(cos_x, sin_x);
-
-	//// 回転を適用
-	//bone_matrix = yaw_m * pitch_m * bone_matrix;
-
+	// 変換後のXYZ軸を取得
 	// MixamoのモデルはY軸がボーンの進行方向であるため、それを前提に作成する
 	// ヨー軸回転 : Z, ピッチ軸回転 : X, ロール軸回転 : Y
-	const auto frame_local_pos		= MGetTranslateElem(frame_local_matrix);
-	const auto frame_axis			= math::ConvertRotMatrixToAxis(frame_local_matrix);
-	const auto local_destination	= world_destination - frame_local_pos;
-	const auto dir					= v3d::GetNormalizedV(local_destination - frame_local_pos);
+	const auto current_axis = math::ConvertRotMatrixToAxis(child_world_m);
+    Axis target_axis;
+    target_axis.y_axis		= v3d::GetNormalizedV(child_world_pos - child_world_pos);
+	target_axis.x_axis		= math::GetNormalVector(current_axis.z_axis, target_axis.y_axis);		// 一時的なピッチ軸回転を計算
+    target_axis.z_axis		= math::GetNormalVector(target_axis.y_axis,  target_axis.x_axis);
+    target_axis.x_axis		= math::GetNormalVector(target_axis.z_axis,  target_axis.y_axis);		// ピッチ軸回転を再計算
+    target_axis.x_axis		= target_axis.x_axis * -1.0f;											// 軸の向き不一致を解消するために反転
 
-	// ヨー軸回転値を取得
-	const auto dir_z0		= VGet(dir.x, dir.y, 0.0f);
-	const auto z_axis_z0	= VGet(frame_axis.z_axis.x, frame_axis.z_axis.y, 0.0f);
-	const auto yaw			= math::GetYaw(dir_z0 - z_axis_z0);
-	const auto yaw_m		= MGetRotZ(yaw);
+	axis::Draw(target_axis, child_world_pos, 50);
 
-	// ピッチ軸回転値を取得
-	//const auto pitch		= math::GetPitch(dir - frame_axis.x_axis);
-	//const auto pitch_m		= MGetRotZ(pitch);
+	// 子のローカル回転行列を取得
+	const auto parent_world_m			= MV1GetFrameLocalWorldMatrix(model_handle, MV1GetFrameParent(model_handle, frame_index));
+	const auto parent_world_rot_m		= matrix::GetRotMatrix(parent_world_m);
+	const auto parent_world_rot_inv_m	= MInverse(parent_world_rot_m);
+	auto	   target_world_rot_m		= math::ConvertAxisToRotMatrix(target_axis);
+	child_local_m = target_world_rot_m * parent_world_rot_inv_m;
 
-	// 回転を適用
-	frame_local_matrix = yaw_m * /*pitch_m * */MGetRotElem(frame_local_matrix);
-	matrix::SetPos(frame_local_matrix, frame_local_pos);
+	// 座標を戻し回転結果をフレームに適用
+	matrix::SetPos(child_local_m, child_local_pos);
+	MV1SetFrameUserLocalMatrix(model_handle, frame_index, child_local_m);
 }

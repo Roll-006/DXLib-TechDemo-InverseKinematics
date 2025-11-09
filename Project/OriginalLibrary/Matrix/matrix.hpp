@@ -87,6 +87,28 @@ namespace matrix
 		mat.m[3][2] = pos.z;
 	}
 
+	/// @brief 行列のスケールを取得
+	[[nodiscard]] inline VECTOR GetScale(const MATRIX& mat)
+	{
+		const auto scale_x = VGet(mat.m[0][0], mat.m[0][1], mat.m[0][2]);
+		const auto scale_y = VGet(mat.m[1][0], mat.m[1][1], mat.m[1][2]);
+		const auto scale_z = VGet(mat.m[2][0], mat.m[2][1], mat.m[2][2]);
+
+		return { VSize(scale_x), VSize(scale_y), VSize(scale_z) };
+	}
+	
+	[[nodiscard]] inline MATRIX GetRotMatrix(const MATRIX& mat)
+	{
+		const auto scale		= GetScale(mat);
+		const auto scale_rot_m	= MGetRotElem(mat);
+
+		auto rot_m = scale_rot_m;
+		rot_m.m[0][0] /= scale.x; rot_m.m[0][1] /= scale.x; rot_m.m[0][2] /= scale.x;
+		rot_m.m[1][0] /= scale.y; rot_m.m[1][1] /= scale.y; rot_m.m[1][2] /= scale.y;
+		rot_m.m[2][0] /= scale.z; rot_m.m[2][1] /= scale.z; rot_m.m[2][2] /= scale.z;
+		return rot_m;
+	}
+
 	inline void Draw(const int x, const int y, const MATRIX& mat)
 	{
 		for (int i = 0; i < 4; ++i)

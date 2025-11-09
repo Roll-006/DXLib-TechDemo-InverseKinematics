@@ -84,8 +84,6 @@ void PhysicsManager::ProjectPos()
 
 		const auto result_pos = *project_pos + axis::GetWorldYAxis() * push_back_length;
 		obj->GetTransform()->SetPos(CoordinateKind::kWorld, result_pos);
-
-		printfDx("size : %d, dist : %f\n", hit_triangle.size(), push_back_length);
 	}
 }
 

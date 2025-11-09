@@ -1,4 +1,5 @@
 #pragma once
+#include <MixamoHelper/mixamo_helper.hpp>
 #include "../Calculation/math.hpp"
 #include "../Path/bone_path.hpp"
 
@@ -12,5 +13,5 @@ public:
 	void LegIK(const int model_handle);
 
 private:
-	void CalcOneBoneIK(const VECTOR& world_destination, MATRIX& frame_local_matrix);
+	void CalcOneBoneIK(const int model_handle, const VECTOR& world_destination, const int frame_index);
 };
