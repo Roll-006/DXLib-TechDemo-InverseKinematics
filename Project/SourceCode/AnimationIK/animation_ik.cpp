@@ -18,7 +18,8 @@ void AnimationIK::LeftLegIK(const int model_handle, const VECTOR& world_destinat
 	//auto	   current_frame_index	= MV1GetFrameParent(model_handle, end_frame_index);
 	//auto	   loop_count			= 0;
 
-	FrameIK(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.LEFT_UP_LEG), MV1SearchFrame(model_handle, BonePath.LEFT_FOOT));
+	FrameIK(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.LEFT_LEG),    MV1SearchFrame(model_handle, BonePath.LEFT_FOOT));
+	//FrameIK(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.LEFT_UP_LEG), MV1SearchFrame(model_handle, BonePath.LEFT_FOOT));
 
 	//while (true)
 	//{
@@ -89,8 +90,27 @@ void AnimationIK::FrameIK(const int model_handle, const VECTOR& world_destinatio
 	const auto end_world_pos	= MGetTranslateElem(end_world_m);
 
 	// 終点フレームに回転させた軸から補助行列を取得する
-	const auto current_axis		= math::ConvertRotMatrixToAxis(begin_world_m);
-	const auto forward			= v3d::GetNormalizedV(end_world_pos - begin_world_pos);
-	const auto aid_axis			= CreateAxis(current_axis, forward);
+	const auto aid_current_axis	= math::ConvertRotMatrixToAxis(begin_world_m);
+	const auto aid_forward		= v3d::GetNormalizedV(end_world_pos - begin_world_pos);
+	const auto aid_axis			= CreateAxis(aid_current_axis, aid_forward);
 	const auto aid_rot_m		= math::ConvertAxisToRotMatrix(aid_axis);
+
+	// 終点フレームの目的の
+	const auto forward			= v3d::GetNormalizedV(world_destination - begin_world_pos);
+	const auto target_axis		= CreateAxis(aid_axis, forward);
+	const auto target_rot_m		= math::ConvertAxisToRotMatrix(target_axis);
+	const auto result_target_rot_m = MTranspose(aid_rot_m) * target_rot_m;
+
+	axis::Draw(aid_axis, begin_world_pos, 50);
+	axis::Draw(target_axis, begin_world_pos, 50);
+
+	// 子のローカル回転行列を取得
+	const auto parent_world_m			= MV1GetFrameLocalWorldMatrix(model_handle, MV1GetFrameParent(model_handle, begin_frame_index));
+	const auto parent_world_rot_m		= matrix::GetRotMatrix(parent_world_m);
+	const auto parent_world_rot_inv_m	= MInverse(parent_world_rot_m);
+	begin_local_m = result_target_rot_m * parent_world_rot_inv_m;
+
+	// 座標を戻し回転結果をフレームに適用
+	matrix::SetPos(begin_local_m, begin_local_pos);
+	MV1SetFrameUserLocalMatrix(model_handle, begin_frame_index, begin_local_m);
 }
