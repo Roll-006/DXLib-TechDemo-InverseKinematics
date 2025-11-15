@@ -54,7 +54,7 @@ void Player::Update()
 	m_look_dir_offset_speed				= kLookDirOffsetSpeed;
 
 	m_state		->Update(std::static_pointer_cast<Player>(shared_from_this()));
-	m_animator	->Update();
+	//m_animator	->Update();
 
 
 

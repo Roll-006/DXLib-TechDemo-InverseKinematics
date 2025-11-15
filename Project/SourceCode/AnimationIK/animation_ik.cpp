@@ -18,8 +18,11 @@ void AnimationIK::LeftLegIK(const int model_handle, const VECTOR& world_destinat
 	//auto	   current_frame_index	= MV1GetFrameParent(model_handle, end_frame_index);
 	//auto	   loop_count			= 0;
 
-	FrameIK(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.LEFT_LEG),    MV1SearchFrame(model_handle, BonePath.LEFT_FOOT));
-	//FrameIK(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.LEFT_UP_LEG), MV1SearchFrame(model_handle, BonePath.LEFT_FOOT));
+	//OneFrameIK	(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.RIGHT_UP_LEG));
+	FrameIK(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.LEFT_TOE_BASE),	MV1SearchFrame(model_handle, BonePath.LEFT_TOE_END));
+	FrameIK(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.LEFT_FOOT),		MV1SearchFrame(model_handle, BonePath.LEFT_TOE_END));
+	FrameIK(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.LEFT_LEG),		MV1SearchFrame(model_handle, BonePath.LEFT_TOE_END));
+	FrameIK(model_handle, world_destination, MV1SearchFrame(model_handle, BonePath.LEFT_UP_LEG),	MV1SearchFrame(model_handle, BonePath.LEFT_TOE_END));
 
 	//while (true)
 	//{
@@ -79,38 +82,33 @@ void AnimationIK::OneFrameIK(const int model_handle, const VECTOR& world_destina
 
 void AnimationIK::FrameIK(const int model_handle, const VECTOR& world_destination, const int begin_frame_index, const int end_frame_index)
 {
-	auto	   begin_local_m	= MV1GetFrameLocalMatrix(model_handle, begin_frame_index);
-	const auto begin_local_pos	= MGetTranslateElem(begin_local_m);
-	auto	   begin_world_m	= MV1GetFrameLocalWorldMatrix(model_handle, begin_frame_index);
-	const auto begin_world_pos	= MGetTranslateElem(begin_world_m);
+	// 起点および終点フレームの情報を取得
+	auto	   begin_local_m		= MV1GetFrameLocalMatrix(model_handle, begin_frame_index);
+	const auto begin_local_pos		= MGetTranslateElem(begin_local_m);
+	auto	   begin_world_m		= MV1GetFrameLocalWorldMatrix(model_handle, begin_frame_index);
+	const auto begin_world_pos		= MGetTranslateElem(begin_world_m);
+	auto	   end_world_m			= MV1GetFrameLocalWorldMatrix(model_handle, end_frame_index);
+	const auto end_world_pos		= MGetTranslateElem(end_world_m);
 
-	auto	   end_local_m		= MV1GetFrameLocalMatrix(model_handle, end_frame_index);
-	const auto end_local_pos	= MGetTranslateElem(end_local_m);
-	auto	   end_world_m		= MV1GetFrameLocalWorldMatrix(model_handle, end_frame_index);
-	const auto end_world_pos	= MGetTranslateElem(end_world_m);
+	const auto current_axis			= math::ConvertRotMatrixToAxis(begin_world_m);
 
 	// 終点フレームに回転させた軸から補助行列を取得する
-	const auto aid_current_axis	= math::ConvertRotMatrixToAxis(begin_world_m);
-	const auto aid_forward		= v3d::GetNormalizedV(end_world_pos - begin_world_pos);
-	const auto aid_axis			= CreateAxis(aid_current_axis, aid_forward);
-	const auto aid_rot_m		= math::ConvertAxisToRotMatrix(aid_axis);
+	const auto aid_forward			= v3d::GetNormalizedV(end_world_pos - begin_world_pos);
+	const auto aid_axis				= CreateAxis(current_axis, aid_forward);
+	const auto aid_rot_m			= math::ConvertAxisToRotMatrix(aid_axis);
 
-	// 終点フレームの目的の
-	const auto forward			= v3d::GetNormalizedV(world_destination - begin_world_pos);
-	const auto target_axis		= CreateAxis(aid_axis, forward);
-	const auto target_rot_m		= math::ConvertAxisToRotMatrix(target_axis);
-	const auto result_target_rot_m = MTranspose(aid_rot_m) * target_rot_m;
+	// 回転すべき行列を取得
+	const auto target_forward		= v3d::GetNormalizedV(world_destination - begin_world_pos);
+	const auto target_axis			= CreateAxis(current_axis, target_forward);
+	const auto target_rot_m			= math::ConvertAxisToRotMatrix(target_axis);
 
-	axis::Draw(aid_axis, begin_world_pos, 50);
-	axis::Draw(target_axis, begin_world_pos, 50);
+	// aid_rot_mがtarget_rot_mに回転するための回転行列を取得
+	const auto delta_rot_m = target_rot_m * MInverse(aid_rot_m);
 
 	// 子のローカル回転行列を取得
-	const auto parent_world_m			= MV1GetFrameLocalWorldMatrix(model_handle, MV1GetFrameParent(model_handle, begin_frame_index));
-	const auto parent_world_rot_m		= matrix::GetRotMatrix(parent_world_m);
-	const auto parent_world_rot_inv_m	= MInverse(parent_world_rot_m);
-	begin_local_m = result_target_rot_m * parent_world_rot_inv_m;
+	const auto new_local_rot_m	= delta_rot_m * matrix::GetRotMatrix(begin_local_m);
 
-	// 座標を戻し回転結果をフレームに適用
-	matrix::SetPos(begin_local_m, begin_local_pos);
+	// 回転を上書きしてフレームに適用
+	matrix::SetRot(begin_local_m, new_local_rot_m);
 	MV1SetFrameUserLocalMatrix(model_handle, begin_frame_index, begin_local_m);
 }

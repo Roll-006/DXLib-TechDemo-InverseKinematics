@@ -36,5 +36,5 @@ private:
 	/// @param world_destination 目標地点
 	/// @param begin_frame_index 起点フレームのインデックス
 	/// @param end_frame_index 終点フレームのインデックス
-	void FrameIK	(const int model_handle, const VECTOR& world_destination, const int begin_frame_index, const int end_frame_index);
+	void FrameIK(const int model_handle, const VECTOR& world_destination, const int begin_frame_index, const int end_frame_index);
 };
